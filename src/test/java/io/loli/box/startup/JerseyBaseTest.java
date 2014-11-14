@@ -1,16 +1,11 @@
 package io.loli.box.startup;
 
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.DeploymentContext;
 import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.grizzly.GrizzlyTestContainerFactory;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by 叶 on 2014/11/13.
