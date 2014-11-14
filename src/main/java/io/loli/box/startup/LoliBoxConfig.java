@@ -1,47 +1,59 @@
 package io.loli.box.startup;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by 叶 on 2014/11/14.
+ * <p>
+ * Config class of config.properties.
+ * 
+ * <p>
+ * Reload the latest properties from config file
+ * 
+ * <pre>
+ * <code>
+ * LoliBoxConfig config = LoliBoxConfig.newInstance();
+ * </code>
+ * </pre>
+ * 
+ * Get last used config object if you do not want to reload from config file
+ * 
+ * <pre>
+ * <code>
+ * LoliBoxConfig config = LoliBoxConfig.getInstance();
+ * </code>
+ * </pre>
  */
 public class LoliBoxConfig {
     public String address = "0.0.0.0";
     public String port = "8888";
     public String url = "http://" + address + ":" + port + "/";
 
-    private static Logger logger = Logger.getLogger(LoliBoxConfig.class.getName());
+    private String savePath;
 
     private Properties prop = null;
 
-    // Init property
+    // Get host and port from property file
     {
-        if (prop == null) {
-            prop = new Properties();
+        ConfigLoader.reload();
+        prop = ConfigLoader.getProp();
+        String addressInProperty = prop.getProperty("site.host");
+        if (StringUtils.isNoneBlank(addressInProperty)) {
+            address = addressInProperty;
         }
-        try {
-            prop.load(LoliBoxConfig.class.getResourceAsStream("/config.properties"));
-            logger.info("Reading config.properties...");
-            String addressInProperty = prop.getProperty("site.host");
-            if (StringUtils.isNoneBlank(addressInProperty)) {
-                address = addressInProperty;
-            }
 
-            String portInProperty = prop.getProperty("site.port");
-            if (StringUtils.isNoneBlank(addressInProperty)) {
-                port = portInProperty;
-            }
-
-            url = getURIString();
-
-        } catch (IOException e) {
-            logger.warning("config.properties not found in classpath. You need to create it in classpath\n"
-                + "And now default properties will be used");
+        String portInProperty = prop.getProperty("site.port");
+        if (StringUtils.isNoneBlank(addressInProperty)) {
+            port = portInProperty;
         }
+
+        String savePathProperty = prop.getProperty("file.folder");
+        if (StringUtils.isNoneBlank(savePathProperty)) {
+            savePath = savePathProperty;
+        }
+
+        url = getURIString();
 
     }
 
@@ -77,5 +89,24 @@ public class LoliBoxConfig {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
+    }
+
+    private static LoliBoxConfig config = new LoliBoxConfig();
+
+    public static LoliBoxConfig getInstance() {
+        return config;
+    }
+
+    public static LoliBoxConfig newInstance() {
+        config = new LoliBoxConfig();
+        return config;
     }
 }
