@@ -36,7 +36,7 @@ public class LoliBoxServer {
         final ResourceConfig rc = new ResourceConfig().packages(packages);
         server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
         server.getServerConfiguration().addHttpHandler(
-                new StaticHttpHandler("src/main/resources/web"), "/src/main/resources/web");
+                new CLStaticHttpHandler(HttpServer.class.getClassLoader(), "/web/"), "/web");
         server.start();
         System.in.read();
     }
