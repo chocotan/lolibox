@@ -10,6 +10,6 @@ public class IndexAction {
 
     @GET
     public Response index() {
-        return Response.temporaryRedirect(UriBuilder.fromUri("/index.html").build()).build();
+        return Response.temporaryRedirect(UriBuilder.fromUri("/web/index.html").build()).build();
     }
 }

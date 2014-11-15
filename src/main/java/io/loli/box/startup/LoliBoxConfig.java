@@ -36,7 +36,6 @@ public class LoliBoxConfig {
 
     // Get host and port from property file
     {
-        ConfigLoader.reload();
         prop = ConfigLoader.getProp();
         String addressInProperty = prop.getProperty("site.host");
         if (StringUtils.isNoneBlank(addressInProperty)) {

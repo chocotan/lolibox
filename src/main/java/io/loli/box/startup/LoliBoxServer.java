@@ -18,7 +18,7 @@ public class LoliBoxServer {
 
     private String port = config.getPort();
     private String address = config.getAddress();
-    
+
     private static String packages = "io.loli.box.controller";
     private String schema = "http";
 
@@ -38,7 +38,7 @@ public class LoliBoxServer {
         final ResourceConfig rc = new ResourceConfig().packages(packages);
         server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
         server.getServerConfiguration().addHttpHandler(
-            new CLStaticHttpHandler(HttpServer.class.getClassLoader(), "/web/"), "/");
+            new CLStaticHttpHandler(HttpServer.class.getClassLoader(), "/web/"), "/web");
         server.start();
     }
 

@@ -19,6 +19,9 @@ public class ConfigLoader {
     }
 
     public static Properties reload() {
+        if (prop == null) {
+            prop = new Properties();
+        }
         logger.info("Ready to load config.properties");
         try {
             prop.load(LoliBoxConfig.class.getResourceAsStream("/config.properties"));
