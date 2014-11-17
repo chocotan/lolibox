@@ -53,13 +53,6 @@
     </scm>
 
     <dependencies>
-        <!-- servlet api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
         <!-- 阿里云oss -->
         <dependency>
             <groupId>io.loli.storage</groupId>
