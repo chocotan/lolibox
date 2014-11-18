@@ -83,12 +83,10 @@
             <artifactId>jersey-container-grizzly2-http</artifactId>
             <version>2.13</version>
         </dependency>
-        <!-- uncomment this to get JSON support: <dependency> <groupId>org.glassfish.jersey.media</groupId> <artifactId>jersey-media-moxy</artifactId> 
-            </dependency> -->
 
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
+            <artifactId>jersey-media-json-processing</artifactId>
             <version>2.13</version>
         </dependency>
         <dependency>

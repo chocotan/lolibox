@@ -21,5 +21,4 @@ public class FileSystemStorageService implements StorageService {
         Files.copy(is, targetPath);
         return targetPath.toUri().toURL();
     }
-
 }

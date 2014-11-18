@@ -21,4 +21,11 @@ public class IndexHtmlTest extends GrizzlyBaseTest {
             .request(MediaType.TEXT_HTML).get();
         Assert.assertEquals(HttpStatus.OK_200.getStatusCode(), response.getStatus());
     }
+
+    @Test
+    public void testHello() {
+        String entity = client.target(new LoliBoxConfig().getUrl()).path("hello").request(MediaType.TEXT_PLAIN_TYPE)
+            .get(String.class);
+        Assert.assertEquals("hello", entity);
+    }
 }

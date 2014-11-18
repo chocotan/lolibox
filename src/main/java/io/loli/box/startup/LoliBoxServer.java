@@ -3,11 +3,15 @@ package io.loli.box.startup;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.json.stream.JsonGenerator;
 import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.http.server.CLStaticHttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jsonp.JsonProcessingFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
@@ -36,9 +40,15 @@ public class LoliBoxServer {
 
     public void start() throws IOException {
         final ResourceConfig rc = new ResourceConfig().packages(packages);
+        rc.register(MultiPartFeature.class).register(JsonProcessingFeature.class)
+            .property(JsonGenerator.PRETTY_PRINTING, true);
         server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
+        // Add CLStaticHttpHandler to show html files
         server.getServerConfiguration().addHttpHandler(
             new CLStaticHttpHandler(HttpServer.class.getClassLoader(), "/web/"), "/web");
+
+        // Add StaticHttpHandler to show imgs
+        server.getServerConfiguration().addHttpHandler(new StaticHttpHandler(config.getSavePath()), "/show");
         server.start();
     }
 
