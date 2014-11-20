@@ -17,7 +17,7 @@ public class IndexHtmlTest extends GrizzlyBaseTest {
     @Test
     public void testHtml() {
         Client client = ClientBuilder.newClient();
-        Response response = client.target(new LoliBoxConfig().getUrl()).path("web/index.html")
+        Response response = client.target(new LoliBoxConfig().getUrl()).path("/")
             .request(MediaType.TEXT_HTML).get();
         Assert.assertEquals(HttpStatus.OK_200.getStatusCode(), response.getStatus());
     }
