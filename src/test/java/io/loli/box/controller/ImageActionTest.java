@@ -3,8 +3,6 @@ package io.loli.box.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import io.loli.box.startup.JerseyBaseTest;
-import io.loli.box.startup.LoliBoxConfig;
-import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
 
 import java.io.File;
@@ -27,14 +25,15 @@ public class ImageActionTest extends JerseyBaseTest {
         File file = new File(ImageAction.class.getResource("/test.jpg").getFile());
         final FileDataBodyPart filePart = new FileDataBodyPart("image", file);
         final MultiPart multipart = new FormDataMultiPart().bodyPart(filePart);
-        final Response response = target(new LoliBoxConfig().getUrl()).path("image/upload")
-            .request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(multipart, multipart.getMediaType()));
+        final Response response = target("image/upload").request(MediaType.APPLICATION_JSON_TYPE).post(
+            Entity.entity(multipart, multipart.getMediaType()));
         assertEquals(200, response.getStatus());
         StatusBean result = response.readEntity(StatusBean.class);
         assertEquals("success", result.getStatus());
         assertNotNull(result.getMessage());
-        String imgUrl = new LoliBoxConfig().getUrl() + result.getMessage();
-        System.out.println(imgUrl);
-        assertEquals(200, FileUtil.getUrlStatus(imgUrl));
+        String imgUrl = result.getMessage();
+        final Response imgResponse = target(imgUrl).request().get();
+        assertEquals(200, imgResponse.getStatus());
     }
+
 }

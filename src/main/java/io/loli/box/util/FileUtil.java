@@ -38,8 +38,8 @@ public class FileUtil {
      * @return Suffix of this file
      */
     public static String getSuffix(String filename) {
-        if (filename.indexOf(".") >= 0) {
-            return filename.substring(filename.indexOf(".") + 1);
+        if (filename.lastIndexOf(".") >= 0) {
+            return filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
         } else {
             return "";
         }

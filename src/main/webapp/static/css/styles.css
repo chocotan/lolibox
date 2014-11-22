@@ -1,0 +1,170 @@
+.footer {
+    background-color: rgb(245, 245, 245);
+    position: fixed;
+    font-size: 1em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-top: 1px solid rgb(229, 229, 229);
+    padding: 0.8em;
+    height: 5em;
+    position: fixed;
+}
+
+.uploader {
+    overflow: auto;
+    top: 50px;
+    position: absolute;
+    bottom: 5em;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    position: absolute;
+    width: 100%;
+    bottom: 80px;
+}
+
+.uploader-to-links {
+    bottom: 20.5em;
+}
+
+.uploader-to-footer {
+    bottom: 5em;
+}
+
+.uploader-div {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.uploader-links-panel {
+    margin-bottom: 0px !important;
+}
+
+body {
+    
+}
+
+.uploader-form-file {
+    display: none !important;
+}
+
+#fileList>li {
+    list-style: none;
+    margin: 0 -30px;
+}
+
+#fileList {
+    text-align: left;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.imglist-row {
+    
+}
+
+.thumb {
+    margin: 1 !important;
+    max-height: 140px;
+    max-width: 140px;
+    min-height: 140px;
+    position: relative;
+    z-index: 0;
+}
+
+.progress-div {
+    z-index: 2;
+    float: right;
+    position: relative;
+    margin-top: -141px;
+    height: 141px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.59);
+}
+
+.name-div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    z-index: 3;
+    min-width: 100%;
+    max-width: 100%;
+    float: left;
+    margin-top: -21px;
+    margin-left: 1px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.71);
+    max-width: 100%;
+}
+
+.img-float {
+    float: left;
+    padding: 6;
+    margin: 5;
+    max-width: 50%;
+}
+
+.img-selected {
+    background-color: rgb(170, 170, 170) !important;
+}
+
+.thumbnail {
+    margin-bottom: 0px !important;
+}
+
+.uploader-links-container {
+    position: fixed;
+    bottom: 5em;
+    z-index: 5;
+    right: 0;
+    left: 0;
+    height: 15.5em;
+}
+
+.links-left-btn {
+    width: 100px;
+}
+
+.links-left, .links-right {
+    float: left;
+}
+
+.links-right {
+    width: 75%;
+}
+
+.links-left {
+    width: 23%;
+}
+
+#links-result {
+    height: 8.9em;
+    text-align: left !important;
+    float: left;
+    margin-left: 5px;
+    resize: none;
+    width: 80%;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(255, 255, 255);
+    padding: 0.125em;
+    color: rgb(102, 102, 102);
+    outline: none;
+    font-family: monospace;
+    text-align: right;
+    line-height: 120%;
+}
+
+.main {
+    margin-top: 50px;
+}
+
+.hide {
+    display: none;
+}
+
+.uploader-div-top {
+    margin-top: 1em;
+}
