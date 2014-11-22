@@ -51,7 +51,7 @@ public class ImageAction {
             } catch (URISyntaxException e) {
                 logger.warning("Invalid uri: " + e.getMessage());
             }
-            return new StatusBean("success", "show/" + urlStr);
+            return new StatusBean("success", "images/" + urlStr);
         } else {
             return new StatusBean("error", "Failed to upload");
         }
