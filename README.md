@@ -3,6 +3,9 @@ Lolibox
 
 一个简单、方便的图床程序
 
+###DEMO
+https://loli.io
+
 ###运行环境
 1. Java 7或以上版本
 2. Maven
