@@ -31,7 +31,6 @@ java -jar lolibox-x.y.z-SNAPSHOT-war-exec.jar -httpPort=8080
 
 ####相关配置
 1. 图片保存位置: 默认保存在[用户工作目录/lolibox/]下，`src/main/resources/config.properties`中可以修改此路径
-2. 端口：`pom.xml`中找到`<port>8888</port>`，在此处修改
 
 ####预览
 http://r.loli.io/2MzeEv.png
