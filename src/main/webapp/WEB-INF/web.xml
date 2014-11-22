@@ -7,6 +7,10 @@
         <location>/WEB-INF/jsp/404.jsp</location>
     </error-page>
 
+    <welcome-file-list>
+        <welcome-file>/</welcome-file>
+    </welcome-file-list>
+
 
     <context-param>
         <param-name>contextConfigLocation</param-name>

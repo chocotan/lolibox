@@ -14,7 +14,6 @@ import org.glassfish.jersey.server.mvc.Viewable;
 public class IndexAction {
 
     @GET
-    @Path("/")
     @Produces({ "text/html" })
     public Viewable index() {
         return new Viewable("/index", this);

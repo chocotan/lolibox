@@ -9,7 +9,7 @@
             class="icon-bar"></span>
         </button>
         <a class="navbar-brand title" href="${pageContext.request.contextPath}/">Lolibox</a>
-        <p class="navbar-text">方便、快捷地建立属于你自己的图床</p>
+        <p class="navbar-text">一个方便、快捷的图床程序</p>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -18,6 +18,9 @@
       </div>
     </div>
   </nav>
-
+  <a href="https://github.com/chocotan/lolibox" target="_blank"><img
+    style="position: absolute; top: 0; right: 0; border: 0; z-index: 2"
+    src="${pageContext.request.contextPath}/static/img/github.png" alt="Fork me on GitHub"
+    data-canonical-src="${pageContext.request.contextPath}/static/img/github.png"></a>
 
 </div>

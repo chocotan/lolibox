@@ -1,7 +1,5 @@
 package io.loli.box.service;
 
-import io.loli.box.service.impl.FileSystemStorageService;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

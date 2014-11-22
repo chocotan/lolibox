@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Lolibox-方便、快捷的建立属于你自己的图床</title>
+<title>Lolibox-一个方便、快捷的图床程序</title>
 <jsp:include page="meta.jsp" />
 </head>
 <body>
