@@ -35,6 +35,8 @@ public class LoliBoxConfig {
 
     private String savePath;
 
+    private String email;
+
     private Properties prop = null;
 
     private StorageService service = null;
@@ -43,18 +45,38 @@ public class LoliBoxConfig {
     {
         prop = ConfigLoader.getProp();
 
+        email = prop.getProperty("admin.email");
+        if (StringUtils.isNotBlank(email)) {
+        } else {
+            email = System.getenv("LOLIBOX_ADMIN_EMAIL");
+            if (StringUtils.isNotBlank(email)) {
+            } else {
+                log.warning("你还没有设置你的邮箱");
+            }
+        }
+
         String savePathProperty = prop.getProperty("file.folder");
-        if (StringUtils.isNoneBlank(savePathProperty)) {
+        if (StringUtils.isNotBlank(savePathProperty)) {
             savePath = savePathProperty;
         } else {
-            savePath = System.getProperty("user.home") + File.separator + "lolibox";
+            String savePathEnv = System.getenv("LOLIBOX_SAVE_PATH");
+            if (StringUtils.isNotBlank(savePathEnv)) {
+                savePath = savePathEnv;
+            } else {
+                savePath = System.getProperty("user.home") + File.separator + "lolibox";
+                log.warning("你没有指定一个图片保存路径，将使用" + savePath + "作为图片保存路径");
+            }
+
             File pathFile = new File(savePath);
             if (!pathFile.exists()) {
                 pathFile.mkdir();
             } else {
                 if (pathFile.isFile()) {
-                    log.warning(savePath
-                        + " is a file instead of a dir, you must use a dir in config.properties. lolibox will exit.");
+                    log.warning(savePath + " 不是一个正确的文件夹，请检查，lolibox即将退出");
+                } else {
+                    if (pathFile.canWrite()) {
+                        log.warning(savePath + "不可写，lolibox即将退出");
+                    }
                 }
             }
         }
@@ -92,5 +114,15 @@ public class LoliBoxConfig {
 
     public void setService(StorageService service) {
         this.service = service;
+    }
+
+    public String getEmail() {
+        if (email == null)
+            return "";
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
