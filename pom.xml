@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.loli</groupId>
     <artifactId>lolibox</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3-RELEASE</version>
     <packaging>war</packaging>
     <url>https://github.com/chocotan/lolibox</url>
     <name>Lolibox</name>
