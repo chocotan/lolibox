@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.loli</groupId>
     <artifactId>lolibox</artifactId>
-    <version>0.0.3-RELEASE</version>
+    <version>0.0.4-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>https://github.com/chocotan/lolibox</url>
     <name>Lolibox</name>
@@ -57,22 +57,10 @@
     </scm>
 
     <dependencies>
-        <!-- 阿里云oss -->
-        <dependency>
-            <groupId>io.loli.storage</groupId>
-            <artifactId>sdk-aliyun</artifactId>
-            <version>0.0.8-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>io.loli</groupId>
             <artifactId>util</artifactId>
             <version>0.0.13</version>
-        </dependency>
-        <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>sdk</artifactId>
-            <version>6.1.0</version>
         </dependency>
 
         <dependency>

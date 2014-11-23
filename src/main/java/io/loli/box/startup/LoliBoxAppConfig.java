@@ -18,7 +18,7 @@ public class LoliBoxAppConfig extends ResourceConfig {
         this.packages(packages).register(MultiPartFeature.class).register(JsonProcessingFeature.class)
             .property(JsonGenerator.PRETTY_PRINTING, true).register(LoggingFilter.class).register(JspMvcFeature.class)
             .property(JspMvcFeature.TEMPLATES_BASE_PATH, "/WEB-INF/jsp").register(RequestContextFilter.class)
-            .property(ServletProperties.FILTER_STATIC_CONTENT_REGEX, "/.*(js|css|swf|ico|png)(\\?.*)*");
+            .property(ServletProperties.FILTER_STATIC_CONTENT_REGEX, "/static/.*(js|css|swf|ico|png)(\\?.*)*");
         // .property(ServerProperties.TRACING, TracingConfig.ALL.name())
 
     }

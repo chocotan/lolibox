@@ -72,10 +72,10 @@ public class LoliBoxConfig {
                 pathFile.mkdir();
             } else {
                 if (pathFile.isFile()) {
-                    log.warning(savePath + " 不是一个正确的文件夹，请检查，lolibox即将退出");
+                    log.warning(savePath + " 不是一个正确的文件夹，请检查");
                 } else {
-                    if (pathFile.canWrite()) {
-                        log.warning(savePath + "不可写，lolibox即将退出");
+                    if (!pathFile.canWrite()) {
+                        log.warning(savePath + "不可写");
                     }
                 }
             }
