@@ -14,11 +14,16 @@ import org.glassfish.jersey.server.mvc.Viewable;
 @Path("/")
 public class IndexAction {
 
-    @GET
-    @POST
     @Produces({ "text/html" })
+    @GET
     public Viewable index() {
         return new Viewable("/index", this);
+    }
+
+    @Produces({ "text/html" })
+    @POST
+    public Viewable indexPost() {
+        return index();
     }
 
 }
