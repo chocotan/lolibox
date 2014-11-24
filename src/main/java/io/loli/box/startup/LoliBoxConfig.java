@@ -64,6 +64,7 @@ public class LoliBoxConfig {
                 savePath = savePathEnv;
             } else {
                 savePath = System.getProperty("user.home") + File.separator + "lolibox";
+                savePath = "/tmp";
                 log.warning("你没有指定一个图片保存路径，将使用" + savePath + "作为图片保存路径");
             }
 

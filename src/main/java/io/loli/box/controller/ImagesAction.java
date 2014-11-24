@@ -5,8 +5,6 @@ import io.loli.box.startup.LoliBoxConfig;
 import java.io.File;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,9 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
-@Named
 @Path("/images")
-@Singleton
 public class ImagesAction {
 
     public static MimetypesFileTypeMap mineUtil = new MimetypesFileTypeMap();
