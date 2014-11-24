@@ -19,6 +19,34 @@ public class IndexAction {
     }
 
     @Produces({ "text/html" })
+    @GET
+    @Path("meta")
+    public Viewable meta() {
+        return new Viewable("/meta");
+    }
+
+    @Produces({ "text/html" })
+    @GET
+    @Path("uploader")
+    public Viewable uploader() {
+        return new Viewable("/uploader");
+    }
+
+    @Produces({ "text/html" })
+    @GET
+    @Path("footer")
+    public Viewable footer() {
+        return new Viewable("/footer");
+    }
+
+    @Produces({ "text/html" })
+    @GET
+    @Path("top")
+    public Viewable top() {
+        return new Viewable("/top");
+    }
+
+    @Produces({ "text/html" })
     @POST
     public Viewable indexPost() {
         return index();

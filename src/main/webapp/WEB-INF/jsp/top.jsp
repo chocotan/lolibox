@@ -19,7 +19,7 @@
     </div>
   </nav>
   <a href="https://github.com/chocotan/lolibox" target="_blank"><img
-    style="position: absolute; top: 0; right: 0; border: 0; z-index: 2"
+    style="position: absolute; top: 0; right: 0; border: 0; z-index: 2; display: none"
     src="${pageContext.request.contextPath}/static/img/github.png" alt="Fork me on GitHub"
     data-canonical-src="${pageContext.request.contextPath}/static/img/github.png"></a>
 

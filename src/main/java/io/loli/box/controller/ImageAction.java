@@ -4,11 +4,7 @@ import io.loli.box.service.AbstractStorageService;
 import io.loli.box.service.StorageService;
 import io.loli.box.util.StatusBean;
 
-import java.io.File;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -22,9 +18,6 @@ import org.glassfish.jersey.server.JSONP;
 
 @Path("/image")
 public class ImageAction {
-
-    private static Logger logger = Logger.getLogger(ImageAction.class.getName());
-
     @POST
     @JSONP
     @Path("upload")
@@ -34,7 +27,7 @@ public class ImageAction {
         @FormDataParam("image") FormDataContentDisposition fileDisposition) {
         StorageService service = AbstractStorageService.getDefaultInstance();
 
-        URL url;
+        String url;
         try {
             url = service.upload(file, fileDisposition.getFileName());
         } catch (Exception e) {
@@ -42,19 +35,9 @@ public class ImageAction {
             return new StatusBean("error", "Error:" + e.getMessage());
         }
         if (url != null) {
-            String urlStr = null;
-            try {
-                java.nio.file.Path path = java.nio.file.Paths.get(url.toURI());
-                File f = path.toFile();
-                String fileName = f.getName();
-                urlStr = fileName;
-            } catch (URISyntaxException e) {
-                logger.warning("Invalid uri: " + e.getMessage());
-            }
-            return new StatusBean("success", "images/" + urlStr);
+            return new StatusBean("success", "images/" + url);
         } else {
             return new StatusBean("error", "Failed to upload");
         }
     }
-
 }

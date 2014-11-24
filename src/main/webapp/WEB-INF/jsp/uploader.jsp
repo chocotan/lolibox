@@ -27,7 +27,7 @@
           <h4 class="modal-title">使用条款</h4>
         </div>
         <div class="modal-body">
-          <jsp:include page="terms.jsp"></jsp:include>
+          <c:import url="/terms" charEncoding="UTF-8"></c:import>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

@@ -31,9 +31,6 @@ public class ImageActionTest extends JerseyBaseTest {
         StatusBean result = response.readEntity(StatusBean.class);
         assertEquals("success", result.getStatus());
         assertNotNull(result.getMessage());
-        String imgUrl = result.getMessage();
-        final Response imgResponse = target(imgUrl).request().get();
-        assertEquals(200, imgResponse.getStatus());
     }
 
 }

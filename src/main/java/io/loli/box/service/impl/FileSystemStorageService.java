@@ -7,14 +7,13 @@ import io.loli.box.util.FileUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileSystemStorageService extends AbstractStorageService {
-    private static List<SuffixBean> suffixes = new ArrayList<>();
+    private static List<SuffixBean> suffixes = new ArrayList<SuffixBean>();
 
     static {
         suffixes.add(new SuffixBean("jpg"));
@@ -30,15 +29,17 @@ public class FileSystemStorageService extends AbstractStorageService {
     }
 
     @Override
-    public URL upload(InputStream is, String filename) throws IOException {
+    public String upload(InputStream is, String filename) throws IOException {
         String suffix = FileUtil.getSuffix(filename);
         if (!suffixes.contains(new SuffixBean(suffix))) {
             throw new IllegalArgumentException("File you uploaded is not an image.");
         }
-        Path targetPath = new File(LoliBoxConfig.getInstance().getSavePath(), FileUtil.getFileName()
-            + (suffix.equals("") ? "" : "." + suffix)).toPath();
+        String savePath = LoliBoxConfig.getInstance().getSavePath();
+        String saveDate = LoliBoxConfig.getInstance().getCurrentSaveDate();
+        String name = FileUtil.getFileName() + (suffix.equals("") ? "" : "." + suffix);
+        Path targetPath = new File(savePath + File.separator + saveDate, name).toPath();
         Files.copy(is, targetPath);
-        return targetPath.toUri().toURL();
+        return saveDate + "/" + name;
     }
 
     final static class SuffixBean {
@@ -65,11 +66,9 @@ public class FileSystemStorageService extends AbstractStorageService {
                     if (this.suffix.equalsIgnoreCase("jpg") && suf.suffix.equalsIgnoreCase("jpeg")) {
                         return true;
                     }
-
                     if (this.suffix.equalsIgnoreCase("jpeg") && suf.suffix.equalsIgnoreCase("jpg")) {
                         return true;
                     }
-
                     return false;
                 }
             } else {

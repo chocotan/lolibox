@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.loli</groupId>
     <artifactId>lolibox</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <version>0.0.4-RELEASE</version>
+    <packaging>jar</packaging>
     <url>https://github.com/chocotan/lolibox</url>
     <name>Lolibox</name>
 
@@ -58,31 +58,45 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.loli</groupId>
-            <artifactId>util</artifactId>
-            <version>0.0.13</version>
-        </dependency>
-
-        <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>2.13</version>
+        </dependency>
 
-        <!-- <dependency> <groupId>org.glassfish.web</groupId> <artifactId>jsp-impl</artifactId> <version>2.2.2-b06</version> 
-            <exclusions> <exclusion> <groupId>org.glassfish</groupId> <artifactId>javax.servlet</artifactId> </exclusion> <exclusion> 
-            <groupId>javax.servlet.jsp</groupId> <artifactId>jsp-api</artifactId> </exclusion> <exclusion> <groupId>javax.el</groupId> 
-            <artifactId>el-api</artifactId> </exclusion> </exclusions> </dependency> -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jsp-impl</artifactId>
+            <version>2.2.2-b06</version>
+            <exclusions>
+                <exclusion>
+
+                    <groupId>org.glassfish</groupId>
+                    <artifactId>javax.servlet</artifactId>
+                </exclusion>
+
+                <exclusion>
+
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>javax.el</groupId>
+                    <artifactId>el-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-processing</artifactId>
             <version>2.13</version>
-        </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
 
         <dependency>
@@ -107,11 +121,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
+            <artifactId>jersey-container-grizzly2-servlet</artifactId>
             <version>2.13</version>
+
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
@@ -123,12 +137,60 @@
                     <artifactId>servlet-api</artifactId>
                 </exclusion>
             </exclusions>
+
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
             <version>2.13</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>1.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.el</groupId>
+                    <artifactId>el-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp.jstl</groupId>
+                    <artifactId>jstl-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.orbit</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>1.2.0.v201105211821</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                    <artifactId>javax.servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                    <artifactId>javax.servlet.jsp</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
@@ -136,23 +198,38 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eclipse.jetty.orbit</groupId>
+            <artifactId>javax.servlet.jsp</artifactId>
+            <version>2.2.0.v201112011158</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.orbit</groupId>
+            <artifactId>org.apache.jasper.glassfish</artifactId>
+            <version>2.2.2.v201112011158</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b05</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.glassfish.jersey.test-framework</groupId>
             <artifactId>jersey-test-framework-core</artifactId>
             <version>2.13</version>
-            <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>2.13</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12-beta-3</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-            <artifactId>jersey-test-framework-provider-jdk-http</artifactId>
-            <version>2.13</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
@@ -160,6 +237,18 @@
             <version>2.13</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>net.sourceforge.argparse4j</groupId>
+            <artifactId>argparse4j</artifactId>
+            <version>0.4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.connectors</groupId>
+            <artifactId>jersey-grizzly-connector</artifactId>
+            <version>2.13</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -169,13 +258,6 @@
             <groupId>org.apache.directory.studio</groupId>
             <artifactId>org.apache.commons.io</artifactId>
             <version>2.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
         </dependency>
 
 
@@ -196,15 +278,15 @@
         </repository>
     </distributionManagement>
     <build>
-        <finalName>io.loli.lolibox</finalName>
+        <finalName>Lolibox-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -223,6 +305,16 @@
                 </executions>
                 <configuration>
                     <encoding>UTF-8</encoding>
+
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>io.loli.box_lib/</classpathPrefix>
+                                <mainClass>io.loli.box.startup.LoliBoxServer</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
                 </configuration>
             </plugin>
             <plugin>
@@ -239,137 +331,29 @@
                 </executions>
             </plugin>
 
-
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <!-- http port -->
-                    <port>8888</port>
-                    <path>/</path>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.loli.box.startup.LoliBoxServer</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>tomcat-run</id>
-                        <goals>
-                            <goal>exec-war-only</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.tomcat.embed</groupId>
-                        <artifactId>tomcat-embed-core</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-util</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-coyote</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-api</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-jdbc</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-dbcp</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-servlet-api</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-jsp-api</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-jasper</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-jasper-el</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-el-api</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-catalina</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-tribes</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-catalina-ha</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-annotations-api</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-juli</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.apache.tomcat.embed</groupId>
-                        <artifactId>tomcat-embed-logging-juli</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.tomcat.embed</groupId>
-                        <artifactId>tomcat-embed-logging-log4j</artifactId>
-                        <version>${tomcat.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
+
         </plugins>
 
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>

@@ -2,6 +2,7 @@ package io.loli.box.startup;
 
 import javax.json.stream.JsonGenerator;
 
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.jsonp.JsonProcessingFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -14,9 +15,9 @@ public class LoliBoxAppConfig extends ResourceConfig {
 
     public LoliBoxAppConfig() {
         this.packages(packages).register(MultiPartFeature.class).register(JsonProcessingFeature.class)
-            .property(JsonGenerator.PRETTY_PRINTING, true).register(JspMvcFeature.class)
-            .property(JspMvcFeature.TEMPLATES_BASE_PATH, "/WEB-INF/jsp")
-            .property(ServletProperties.FILTER_STATIC_CONTENT_REGEX, "/static/.*(js|css|swf|ico|png)(\\?.*)*");
+            .property(JsonGenerator.PRETTY_PRINTING, true).register(JacksonFeature.class);
+        register(JspMvcFeature.class).property(JspMvcFeature.TEMPLATES_BASE_PATH, "/WEB-INF/jsp").property(
+            ServletProperties.FILTER_STATIC_CONTENT_REGEX, "/static/.*(js|css|swf|ico|png)(\\?.*)*");
         // .property(ServerProperties.TRACING,
         // TracingConfig.ALL.name()).register(LoggingFilter.class)
 
