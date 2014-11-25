@@ -1,54 +1,49 @@
 package io.loli.box.controller;
 
+import io.loli.box.startup.LoliBoxConfig;
+
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import jetbrick.template.JetEngine;
+import jetbrick.template.JetTemplate;
+
 import org.glassfish.jersey.server.mvc.Template;
-import org.glassfish.jersey.server.mvc.Viewable;
 
 @Template
 @Path("/")
 public class IndexAction {
 
-    @Produces({ "text/html" })
-    @GET
-    public Viewable index() {
-        return new Viewable("/index", this);
-    }
+    private static JetEngine engine = JetEngine.create();
+    private static final String encoding = "UTF-8";
 
-    @Produces({ "text/html" })
+    @Produces("text/html; charset=" + encoding)
     @GET
-    @Path("meta")
-    public Viewable meta() {
-        return new Viewable("/meta");
-    }
-
-    @Produces({ "text/html" })
-    @GET
-    @Path("uploader")
-    public Viewable uploader() {
-        return new Viewable("/uploader");
-    }
-
-    @Produces({ "text/html" })
-    @GET
-    @Path("footer")
-    public Viewable footer() {
-        return new Viewable("/footer");
-    }
-
-    @Produces({ "text/html" })
-    @GET
-    @Path("top")
-    public Viewable top() {
-        return new Viewable("/top");
+    public String index() {
+        JetTemplate template = engine.getTemplate("/html/fullIndex.html");
+        Map<String, Object> context = new HashMap<String, Object>();
+        context.put("email", LoliBoxConfig.getInstance().getEmail());
+        StringWriter writer = new StringWriter();
+        template.render(context, writer);
+        return writer.toString();
     }
 
     @Produces({ "text/html" })
     @POST
-    public Viewable indexPost() {
+    public String indexPost() {
+        return index();
+    }
+
+    @Produces({ "text/html" })
+    @GET
+    @Path("index.html")
+    public String indexHtml() {
         return index();
     }
 

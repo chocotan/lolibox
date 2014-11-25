@@ -5,99 +5,92 @@ import io.loli.box.service.impl.FileSystemStorageService;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.Properties;
-import java.util.logging.Logger;
+
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * <p>
- * Config class of config.properties.
- * 
- * <p>
- * Reload the latest properties from config file
- * 
- * <pre>
- * <code>
- * LoliBoxConfig config = LoliBoxConfig.newInstance();
- * </code>
- * </pre>
- * 
- * Get last used config object if you do not want to reload from config file
- * 
- * <pre>
- * <code>
- * LoliBoxConfig config = LoliBoxConfig.getInstance();
- * </code>
- * </pre>
- */
 public class LoliBoxConfig {
-    private static Logger log = Logger.getLogger(LoliBoxConfig.class.getName());
 
     private String savePath;
 
     private String email;
-
-    private Properties prop = null;
 
     private StorageService service = null;
 
     private String port = "8888";
     private String address = "0.0.0.0";
 
-    // Get host and port from property file
-    {
-        prop = ConfigLoader.getProp();
+    private void readParams(String[] args) {
+        ArgumentParser parser = ArgumentParsers.newArgumentParser("").description("A simple image hosting software");
 
-        port = prop.getProperty("port");
+        parser.addArgument("-p", "--port").metavar("PORT").type(Integer.class).help("Http port to listen on")
+            .dest("port");
+
+        parser.addArgument("-a", "--address").metavar("ADDRESS").type(String.class).help("Addresses to listen on")
+            .dest("address");
+
+        parser.addArgument("-e", "--email").metavar("EMAIL").type(String.class)
+            .help("Admin email to show on the bottom of page").dest("email");
+
+        parser.addArgument("-s", "--save").metavar("SAVE").type(String.class).help("Where images saved").dest("save");
+
+        try {
+            Namespace res = parser.parseArgs(args);
+            Integer cport = res.getInt("port");
+            if (cport != null) {
+                port = String.valueOf(cport);
+            }
+
+            String caddress = res.getString("address");
+            if (caddress != null) {
+                address = caddress;
+            }
+
+            String cemail = res.getString("email");
+            if (cemail != null) {
+                String email = String.valueOf(cemail);
+                this.setEmail(email);
+            }
+
+            String cpath = res.getString("save");
+            if (cpath != null) {
+                String savePath = String.valueOf(cpath);
+                this.setSavePath(savePath);
+            }
+
+        } catch (ArgumentParserException e) {
+            parser.handleError(e);
+        }
+
+    }
+
+    private LoliBoxConfig(String[] args) {
+        readParams(args);
+
         if (StringUtils.isNotBlank(port)) {
         } else {
             port = "8888";
         }
 
-        address = prop.getProperty("address");
         if (StringUtils.isNotBlank(address)) {
         } else {
             address = "0.0.0.0";
         }
 
-        email = prop.getProperty("admin.email");
         if (StringUtils.isNotBlank(email)) {
         } else {
-            email = System.getenv("LOLIBOX_ADMIN_EMAIL");
-            if (StringUtils.isNotBlank(email)) {
-            } else {
-                log.warning("你还没有设置邮箱");
-            }
         }
 
-        String savePathProperty = prop.getProperty("file.folder");
-        if (StringUtils.isNotBlank(savePathProperty)) {
-            savePath = savePathProperty;
+        if (StringUtils.isNotBlank(savePath)) {
+            setSavePath(savePath);
         } else {
-            savePath = System.getProperty("user.home") + File.separator + "lolibox";
-            log.warning("你没有指定一个图片保存路径，将使用" + savePath + "作为图片保存路径");
-
-            File pathFile = new File(savePath);
-            if (!pathFile.exists()) {
-                pathFile.mkdir();
-            } else {
-                if (pathFile.isFile()) {
-                    log.warning(savePath + " 不是一个正确的文件夹，请检查");
-                } else {
-                    if (!pathFile.canWrite()) {
-                        log.warning(savePath + "不可写");
-                    }
-                }
-            }
+            setSavePath(System.getProperty("user.home") + File.separator + "lolibox");
         }
-
         service = new FileSystemStorageService();
-    }
-
-    // Get property value by its key
-    public String getString(String key) {
-        return prop.getProperty(key);
     }
 
     public String getSavePath() {
@@ -107,7 +100,7 @@ public class LoliBoxConfig {
     public String getCurrentSaveDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         String path = year + File.separator + month + File.separator + day;
         String savePath = getSavePath();
@@ -125,18 +118,24 @@ public class LoliBoxConfig {
     }
 
     public void setSavePath(String savePath) {
+        File file = new File(savePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         this.savePath = savePath;
     }
 
-    private static LoliBoxConfig config = new LoliBoxConfig();
+    private static LoliBoxConfig config = null;
 
-    public static LoliBoxConfig getInstance() {
+    public static LoliBoxConfig getInstance(String[] args) {
+        if (config == null) {
+            config = new LoliBoxConfig(args);
+        }
         return config;
     }
 
-    public static LoliBoxConfig newInstance() {
-        config = new LoliBoxConfig();
-        return config;
+    public static LoliBoxConfig getInstance() {
+        return getInstance(new String[0]);
     }
 
     public StorageService getService() {
