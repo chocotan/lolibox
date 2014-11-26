@@ -16,6 +16,12 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.glassfish.jersey.server.JSONP;
 
+/**
+ * Action to upload image
+ * 
+ * @author choco
+ *
+ */
 @Path("/image")
 public class ImageAction {
     @POST

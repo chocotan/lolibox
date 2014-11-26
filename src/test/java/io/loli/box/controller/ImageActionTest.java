@@ -32,5 +32,4 @@ public class ImageActionTest extends JerseyBaseTest {
         assertEquals("success", result.getStatus());
         assertNotNull(result.getMessage());
     }
-
 }

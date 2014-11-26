@@ -44,6 +44,10 @@ public class LoliBoxStaticHttpHandler extends StaticHttpHandler {
         setFileCacheEnabled(true);
     }
 
+    /**
+     * While image file does not exist, this method will be called<br>
+     * and the 404 png will be write to response
+     */
     protected void onMissingResource(final Request request, final Response response) throws IOException {
         response.setStatus(HttpStatus.NOT_FOUND_404);
         customizedErrorPage(request, response);
@@ -73,8 +77,8 @@ public class LoliBoxStaticHttpHandler extends StaticHttpHandler {
         return in2b;
     }
 
-    /**
-     * {@inheritDoc}
+    /*
+     * Override this method to set CacheControl
      */
     @Override
     protected boolean handle(final String uri, final Request request, final Response response) throws Exception {

@@ -31,7 +31,7 @@ public class LoliBoxServer {
         server = new HttpServer();
         NetworkListener nl = new NetworkListener("Lolibox", config.getAddress(), Integer.parseInt(config.getPort()));
         server.addListener(nl);
-        // Add CLStaticHttpHandler to show html files
+        // Add CLStaticHttpHandler to show static files
         server.getServerConfiguration().addHttpHandler(
             new CLStaticHttpHandler(ClasspathHelper.class.getClassLoader(), "/static/"), "/static");
         // Add StaticHttpHandler to show imgs
@@ -49,6 +49,11 @@ public class LoliBoxServer {
         server.start();
     }
 
+    /**
+     * Start server then blocking
+     * 
+     * @throws IOException
+     */
     public void startAndWait() throws IOException {
         start();
         System.in.read();

@@ -1,6 +1,7 @@
 package io.loli.box.controller;
 
 import io.loli.box.startup.LoliBoxConfig;
+import io.loli.box.startup.LoliBoxStaticHttpHandler;
 
 import java.io.File;
 
@@ -12,15 +13,34 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
+/**
+ * Action for image uploading
+ * 
+ * @author choco
+ *
+ */
 @Path("/images")
 public class ImagesAction {
-
+    /**
+     * Util to read mine type of file
+     */
     public static MimetypesFileTypeMap mineUtil = new MimetypesFileTypeMap();
 
+    // Add png type to mine types
     static {
         mineUtil.addMimeTypes("image/png png");
     }
 
+    /**
+     *
+     * <p>
+     * Replaced with LoliBoxStaticHttpHandler
+     * 
+     * @param image path of image file
+     * @return Generated response
+     * @deprecated replaced with {@link LoliBoxStaticHttpHandler}
+     */
+    @Deprecated
     @GET
     @Path("/{image}")
     @Produces("image/*")

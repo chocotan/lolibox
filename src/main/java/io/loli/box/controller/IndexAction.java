@@ -16,11 +16,24 @@ import jetbrick.template.JetTemplate;
 
 import org.glassfish.jersey.server.mvc.Template;
 
+/**
+ * Action for index page "/" and "index.html"
+ * 
+ * @author choco
+ *
+ */
 @Template
 @Path("/")
 public class IndexAction {
 
+    /**
+     * Template engine to generate html
+     */
     private static JetEngine engine = JetEngine.create();
+
+    /**
+     * Default encoding
+     */
     private static final String encoding = "UTF-8";
 
     @Produces("text/html; charset=" + encoding)
@@ -34,13 +47,21 @@ public class IndexAction {
         return writer.toString();
     }
 
-    @Produces({ "text/html" })
+    /**
+     * Index page for http method POST
+     * <p>
+     * Some browsers like QQBrowser will send post request while change to
+     * chrome model from IE model
+     * 
+     * @return Generated html of index page
+     */
+    @Produces("text/html; charset=" + encoding)
     @POST
     public String indexPost() {
         return index();
     }
 
-    @Produces({ "text/html" })
+    @Produces("text/html; charset=" + encoding)
     @GET
     @Path("index.html")
     public String indexHtml() {

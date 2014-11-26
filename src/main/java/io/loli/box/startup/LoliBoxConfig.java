@@ -13,17 +13,40 @@ import net.sourceforge.argparse4j.inf.Namespace;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Config class of application
+ * 
+ * @author choco
+ *
+ */
 public class LoliBoxConfig {
-
+    /**
+     * Where images saved
+     */
     private String savePath;
 
+    /**
+     * Admin email
+     */
     private String email;
 
     private StorageService service = null;
 
+    /**
+     * Default port
+     */
     private String port = "8888";
+
+    /**
+     * Default host
+     */
     private String address = "0.0.0.0";
 
+    /**
+     * Read config params from command line
+     * 
+     * @param args command line args
+     */
     private void readParams(String[] args) {
         ArgumentParser parser = ArgumentParsers.newArgumentParser("").description("A simple image hosting software");
 
@@ -97,9 +120,16 @@ public class LoliBoxConfig {
         return savePath;
     }
 
+    /**
+     * Get folder for today and will create it if not exist
+     * 
+     * @return
+     */
     public String getCurrentSaveDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
+
+        // I don't known why calendar start with 0
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         String path = year + File.separator + month + File.separator + day;
