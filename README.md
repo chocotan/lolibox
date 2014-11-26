@@ -1,4 +1,4 @@
-Lolibox
+Lolibox [![Build Status](https://buildhive.cloudbees.com/job/chocotan/job/lolibox/badge/icon)](https://buildhive.cloudbees.com/job/chocotan/job/lolibox/)
 =======
 
 A simple, fast image hosting software
