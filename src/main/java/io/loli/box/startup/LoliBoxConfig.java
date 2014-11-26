@@ -123,7 +123,7 @@ public class LoliBoxConfig {
     /**
      * Get folder for today and will create it if not exist
      * 
-     * @return
+     * @return generated date folder
      */
     public String getCurrentSaveDate() {
         Calendar cal = Calendar.getInstance();
