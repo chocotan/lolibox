@@ -48,4 +48,3 @@ java -jar target/Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 
 ####Screenshots
 http://r.loli.io/2MzeEv.png
-http://r.loli.io/EBbyMb.png
