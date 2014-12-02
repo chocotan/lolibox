@@ -42,10 +42,9 @@ java -jar Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 ```
 git clone https://github.com/chocotan/lolibox.git
 cd lolibox
-mvn clean package assembly:assembly
+mvn clean package assembly:single
 java -jar target/Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ####Screenshots
 http://r.loli.io/2MzeEv.png
-http://r.loli.io/EBbyMb.png
