@@ -51,11 +51,14 @@ function showLinks() {
         $(".uploader-links-container").addClass("hide");
     }
 }
+
 $(document)
     .ready(
         function() {
 
-            var uploading = 0;
+            // $("body").on("copy", "#copy_all_btn", function() {
+            // });
+
             $(".uploader-browse-button").click(function() {
                 $(".uploader-form-file").click();
             });
@@ -112,20 +115,11 @@ $(document)
                 $("#links-result").text(text);
 
             });
-
-            // clip
-            var client = new ZeroClipboard($(".copy-all-btn"));
-            client.on("copy", function(event) {
-                var clipboard = event.clipboardData;
-                clipboard.setData("text/plain", $("#links-result").val());
-
-                $("#links-result").select();
-            });
-
-            client.on("aftercopy", function(event) {
+            
+            
+            $("#copy_all_btn").click(function(){
                 $("#links-result").focus();
                 $("#links-result").select();
-
             });
 
             $('.uploader-form')
@@ -133,6 +127,9 @@ $(document)
                     {
                         // This element will accept file drag/drop uploading
                         dropZone : $('body'),
+                        pasteZone : $('body'),
+                        singleFileUploads : true,
+                        limitMultiFileUploads : 1,
 
                         // This function is called when a file is added to the
                         // queue;
@@ -143,8 +140,6 @@ $(document)
                                 return;
                             }
 
-                            while (uploading > 2) {
-                            }
                             var tpl = $('<div class="img-float thumbnail"><img class="thumb" alt=""><div class="name-div"></div><div class="progress-div"></div></div></div>');
 
                             // Append the file name and file size
@@ -169,10 +164,10 @@ $(document)
                                 // Automatically upload the file once it is
                                 // added to
                                 // the queue
+
                                 var jqXHR = data.submit();
                                 // bgContainer.css("background-image","url("+evt.target.result+")");
                                 tpl.addClass("uploading");
-                                uploading += 1;
                                 $(".uploader-div").addClass("uploader-div-top");
                             }
                             reader.readAsDataURL(data.files[0]);
@@ -191,10 +186,8 @@ $(document)
                             // Something has gone wrong!
                             data.context.addClass('error');
                             alert("上传失败:" + data.context.find(".name-div").text());
-                            uploading -= 1;
                         },
                         done : function(e, data) {
-                            uploading += 1;
                             if (data.result.status != "success") {
                                 alert("上传失败:" + data.context.find(".name-div").text() + "," + data.result.message);
                                 return;
@@ -209,6 +202,8 @@ $(document)
 
                             var link = window.location.protocol + "//" + window.location.host + "/" + filename;
 
+                            data.context.find('img').attr("src", link);
+
                             data.context.attr("link", link);
                             $(".thumbnail").unbind("click");
                             $(".thumbnail").click(function() {
@@ -222,4 +217,5 @@ $(document)
                         }
 
                     });
+
         });

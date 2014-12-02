@@ -2,12 +2,12 @@
 <head>
 <title>Lolibox-一个方便、快捷的图床程序</title>
 <script src="static/js/jquery.min.js"></script>
+<script src="static/js/jquery.zeroclipboard.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/jquery.knob.min.js"></script>
 <script src="static/js/jquery.iframe-transport.min.js"></script>
 <script src="static/js/jquery.ui.widget.min.js"></script>
 <script src="static/js/jquery.fileupload.min.js"></script>
-<script src="static/js/clipboard.min.js"></script>
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
 <link href="static/css/styles.css" rel="stylesheet" />
 <script src="static/js/upload.js"></script>
@@ -92,7 +92,7 @@
           您选择了<span class="count-result"></span>张图片
           <button class="btn btn-default btn-xs select-all-btn">全选</button>
           <button class="btn btn-default btn-xs unselect-all-btn">取消</button>
-          <button class="btn btn-default btn-xs copy-all-btn">复制</button>
+          <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn" data-clipboard-target="links-result">复制</button>
         </div>
         <div class="panel-body">
           <div class="links-left">
