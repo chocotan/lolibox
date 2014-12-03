@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import jetbrick.template.JetEngine;
 import jetbrick.template.JetTemplate;
@@ -31,20 +31,14 @@ public class IndexAction {
      */
     private static JetEngine engine = JetEngine.create();
 
-    /**
-     * Default encoding
-     */
-    private static final String encoding = "UTF-8";
-
-    @Produces("text/html;charset=" + encoding)
     @GET
-    public String index() {
+    public Response index() {
         JetTemplate template = engine.getTemplate("/html/fullIndex.html");
         Map<String, Object> context = new HashMap<String, Object>();
         context.put("email", LoliBoxConfig.getInstance().getEmail());
         StringWriter writer = new StringWriter();
         template.render(context, writer);
-        return writer.toString();
+        return Response.ok(writer.toString(), "text/html;charset=UTF-8").build();
     }
 
     /**
@@ -55,16 +49,14 @@ public class IndexAction {
      * 
      * @return Generated html of index page
      */
-    @Produces("text/html;charset=" + encoding)
     @POST
-    public String indexPost() {
+    public Response indexPost() {
         return index();
     }
 
-    @Produces("text/html;charset=" + encoding)
     @GET
     @Path("index.html")
-    public String indexHtml() {
+    public Response indexHtml() {
         return index();
     }
 }
