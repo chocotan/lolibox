@@ -55,10 +55,15 @@ function showLinks() {
 $(document)
     .ready(
         function() {
-
-            // $("body").on("copy", "#copy_all_btn", function() {
-            // });
-
+            var client = new ZeroClipboard($("#copy_all_btn"));
+            client.on("copy", function(event) {
+                var clipboard = event.clipboardData;
+                clipboard.setData("text/plain", $("#links-result").text());
+            });
+            client.on("aftercopy", function(event) {
+                $("#links-result").focus();
+                $("#links-result").select();
+            });
             $(".uploader-browse-button").click(function() {
                 $(".uploader-form-file").click();
             });
@@ -114,12 +119,6 @@ $(document)
                 });
                 $("#links-result").text(text);
 
-            });
-            
-            
-            $("#copy_all_btn").click(function(){
-                $("#links-result").focus();
-                $("#links-result").select();
             });
 
             $('.uploader-form')

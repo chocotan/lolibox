@@ -67,5 +67,4 @@ public class IndexAction {
     public String indexHtml() {
         return index();
     }
-
 }
