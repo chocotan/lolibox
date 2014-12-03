@@ -36,7 +36,7 @@ public class IndexAction {
      */
     private static final String encoding = "UTF-8";
 
-    @Produces("text/html; charset=" + encoding)
+    @Produces("text/html;charset=" + encoding)
     @GET
     public String index() {
         JetTemplate template = engine.getTemplate("/html/fullIndex.html");
@@ -55,13 +55,13 @@ public class IndexAction {
      * 
      * @return Generated html of index page
      */
-    @Produces("text/html; charset=" + encoding)
+    @Produces("text/html;charset=" + encoding)
     @POST
     public String indexPost() {
         return index();
     }
 
-    @Produces("text/html; charset=" + encoding)
+    @Produces("text/html;charset=" + encoding)
     @GET
     @Path("index.html")
     public String indexHtml() {
