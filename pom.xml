@@ -216,16 +216,6 @@
                 </executions>
                 <configuration>
                     <encoding>UTF-8</encoding>
-
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                                <classpathPrefix>io.loli.box_lib/</classpathPrefix>
-                                <mainClass>io.loli.box.startup.LoliBoxServer</mainClass>
-                            </manifest>
-                        </archive>
-                    </configuration>
                 </configuration>
             </plugin>
             <plugin>
@@ -265,7 +255,7 @@
             </resource>
             <resource>
                 <directory>src/main/webapp</directory>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
