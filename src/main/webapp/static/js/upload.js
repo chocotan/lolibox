@@ -55,6 +55,11 @@ function showLinks() {
 $(document)
     .ready(
         function() {
+            $("#copy_all_btn").click(function(){
+                $("#links-result").focus();
+                $("#links-result").select();
+            });
+            
             var client = new ZeroClipboard($("#copy_all_btn"));
             client.on("copy", function(event) {
                 var clipboard = event.clipboardData;
@@ -175,8 +180,7 @@ $(document)
                         progress : function(e, data) {
                             // Calculate the completion percentage of the upload
                             var progress = parseInt(data.loaded / data.total * 100, 10);
-
-                            data.context.find("progress-div").css("width", (100 - progress) + "%");
+                            data.context.find(".progress-div").css("width", (100 - progress) + "%");
                             if (progress == 100) {
                                 data.context.find('label').eq(0).html("上传成功, 正在生成链接...");
                             }
