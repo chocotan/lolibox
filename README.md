@@ -4,7 +4,7 @@ Lolibox [![Build Status](https://buildhive.cloudbees.com/job/chocotan/job/lolibo
 A simple, fast image hosting software
 
 ###DEMO
-https://box.loli.io
+http://hime.io/
 
 ###Environment
 Java 1.6 or above
