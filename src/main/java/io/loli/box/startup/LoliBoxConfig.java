@@ -132,7 +132,16 @@ public class LoliBoxConfig {
         // I don't known why calendar start with 0
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        String path = year + File.separator + month + File.separator + day;
+        String monthStr = String.valueOf(month);
+        if(month < 10){
+            monthStr = "0" + monthStr;
+        }
+        String dayStr = String.valueOf(day);
+        if(day < 10){
+            dayStr = "0" + dayStr;
+        }
+        String path = year + File.separator + monthStr + File.separator + dayStr;
+        
         String savePath = getSavePath();
         if (savePath.endsWith(File.separator)) {
         } else {
