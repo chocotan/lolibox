@@ -25,12 +25,13 @@ java -jar Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 ####Optional params
 
 ```
-[-p PORT] [-a ADDRESS] [-e EMAIL] [-s SAVE]
+[-p PORT] [-a ADDRESS] [-e EMAIL] [-s SAVE] [-pw PASSWORD]
 
-  -p PORT, --port PORT    http port, default port is 8888
-  -a ADDRESS, --address   address to listen on，default is 0.0.0.0
+  -p PORT, --port PORT    http port, default port is `8888`
+  -a ADDRESS, --address   address to listen on，default is `0.0.0.0`
   -e EMAIL, --email EMAIL admin email to show on the bottom of index page
-  -s SAVE, --save SAVE    where images save, default is ${user.home}/lolibox
+  -s SAVE, --save SAVE    where images save, default is `${user.home}/lolibox`
+  -pw PASSWORD, --password PASSWORD password for admin, default passwd is `admin`
 ```
 
 ###Build from github

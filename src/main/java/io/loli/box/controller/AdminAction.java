@@ -12,6 +12,9 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +46,40 @@ public class AdminAction {
 
     private static StorageService ss = AbstractStorageService.getDefaultInstance();
 
+    private static Comparator<File> fileComparator = new Comparator<File>() {
+
+        @Override
+        public int compare(File o1, File o2) {
+            try {
+                if (o1.lastModified() - o2.lastModified() == 0) {
+                    return 0;
+                }
+                return o1.lastModified() - o2.lastModified() > 0 ? -1 : 1;
+            } catch (Exception e) {
+                return -1;
+            }
+        }
+
+    };
+
     @GET
     @JSONP
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public List<FileBean> list(@QueryParam(value = "year") String year, @QueryParam(value = "month") String month,
-        @QueryParam(value = "day") String day) {
+        @QueryParam(value = "day") String day, @Context HttpServletRequest request) {
+
+        Object obj = request.getSession().getAttribute("login");
+
+        // 已经登陆
+        if (obj != null && ((String) obj).equals("success")) {
+        } else {
+            // 没有登陆的话
+            return new ArrayList<FileBean>();
+        }
 
         List<File> files = ss.getFilesByDay(year, month, day);
+        Collections.sort(files, fileComparator);
         return FileUtil.toFileBean(files);
     }
 
@@ -60,7 +89,18 @@ public class AdminAction {
     @Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
     @Produces(MediaType.APPLICATION_JSON)
     public StatusBean delete(@FormParam(value = "year") String year, @FormParam(value = "month") String month,
-        @FormParam(value = "day") String day, @FormParam(value = "name") String name) {
+        @FormParam(value = "day") String day, @FormParam(value = "name") String name,
+        @Context HttpServletRequest request) {
+
+        Object obj = request.getSession().getAttribute("login");
+
+        // 已经登陆
+        if (obj != null && ((String) obj).equals("success")) {
+        } else {
+            // 没有登陆的话
+            return new StatusBean("error", "you must login");
+        }
+
         try {
             ss.deleteFile(year, month, day, name);
         } catch (Exception e) {
