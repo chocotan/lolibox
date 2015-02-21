@@ -26,6 +26,11 @@ public class LoliBoxConfig {
     private String savePath;
 
     /**
+     * password for admin
+     */
+    private String password;
+
+    /**
      * Admin email
      */
     private String email;
@@ -61,6 +66,9 @@ public class LoliBoxConfig {
 
         parser.addArgument("-s", "--save").metavar("SAVE").type(String.class).help("Where images saved").dest("save");
 
+        parser.addArgument("-pw", "--password").metavar("PASSWORD").type(String.class).help("Password for admin")
+            .dest("password");
+
         try {
             Namespace res = parser.parseArgs(args);
             Integer cport = res.getInt("port");
@@ -83,6 +91,12 @@ public class LoliBoxConfig {
             if (cpath != null) {
                 String savePath = String.valueOf(cpath);
                 this.setSavePath(savePath);
+            }
+
+            String cpassword = res.getString("password");
+            if (cpassword != null) {
+                String password = String.valueOf(cpassword);
+                this.setPassword(password);
             }
 
         } catch (ArgumentParserException e) {
@@ -108,6 +122,10 @@ public class LoliBoxConfig {
         } else {
         }
 
+        if (StringUtils.isNotBlank(password)) {
+        } else {
+            password = "admin";
+        }
         if (StringUtils.isNotBlank(savePath)) {
             setSavePath(savePath);
         } else {
@@ -133,15 +151,15 @@ public class LoliBoxConfig {
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         String monthStr = String.valueOf(month);
-        if(month < 10){
+        if (month < 10) {
             monthStr = "0" + monthStr;
         }
         String dayStr = String.valueOf(day);
-        if(day < 10){
+        if (day < 10) {
             dayStr = "0" + dayStr;
         }
         String path = year + File.separator + monthStr + File.separator + dayStr;
-        
+
         String savePath = getSavePath();
         if (savePath.endsWith(File.separator)) {
         } else {
@@ -209,5 +227,13 @@ public class LoliBoxConfig {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

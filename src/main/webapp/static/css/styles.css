@@ -12,7 +12,7 @@
     position: fixed;
 }
 
-.uploader {
+.main {
     overflow: auto;
     top: 50px;
     position: absolute;
@@ -157,9 +157,6 @@ body {
     line-height: 120%;
 }
 
-.main {
-    margin-top: 50px;
-}
 
 .hide {
     display: none;
@@ -171,4 +168,16 @@ body {
 
 #top {
     z-index: 1;
+}
+
+
+
+.preview-img {
+    max-width: 100%;
+    max-height: 410px;
+}
+
+#preview-body {
+    text-align: center;
+    height: 440px;
 }

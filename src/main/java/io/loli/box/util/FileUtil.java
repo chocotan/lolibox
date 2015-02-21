@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtil {
     /*
@@ -69,5 +71,13 @@ public class FileUtil {
         }
         return 0;
 
+    }
+
+    public static List<FileBean> toFileBean(List<File> files) {
+        List<FileBean> beanList = new ArrayList<FileBean>();
+        for (File file : files) {
+            beanList.add(new FileBean(file));
+        }
+        return beanList;
     }
 }
