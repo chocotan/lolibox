@@ -181,3 +181,8 @@ body {
     text-align: center;
     height: 440px;
 }
+
+
+#hidden-block{
+    display:none;
+}

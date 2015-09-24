@@ -36,9 +36,12 @@ public class IndexAction {
         JetTemplate template = engine.getTemplate("/html/fullIndex.html");
         Map<String, Object> context = new HashMap<String, Object>();
         context.put("email", LoliBoxConfig.getInstance().getEmail());
+        context.put("cdnHost", LoliBoxConfig.getInstance().getCdnHost());
+        context.put("httpsHost", LoliBoxConfig.getInstance().getHttpsHost());
         StringWriter writer = new StringWriter();
         template.render(context, writer);
-        return Response.ok(writer.toString(), "text/html;charset=UTF-8").build();
+        return Response.ok(writer.toString(), "text/html;charset=UTF-8")
+                .build();
     }
 
     /**

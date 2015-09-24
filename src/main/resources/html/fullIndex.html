@@ -15,7 +15,10 @@
 </head>
 <body>
   <div class="header">
-
+    <div id="hidden-block">
+      <input type="hidden" id="cdnHost" value="${cdnHost}">
+      <input type="hidden" id="httpsHost" value="${httpsHost}">
+    </div>
     <nav id="top" class="navbar navbar-default navbar-static-top  navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -93,6 +96,15 @@
           <button class="btn btn-default btn-xs select-all-btn">全选</button>
           <button class="btn btn-default btn-xs unselect-all-btn">取消</button>
           <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn" data-clipboard-target="links-result">复制</button>
+          <div class="btn-group" data-toggle="buttons" id="urlModeGroup">
+              <label class="btn btn-xs active btn-default">
+                <input type="radio" name="urlMode" class="urlMode" id="cdnUrlMode" autocomplete="off" checked> CDN
+              </label>
+              <label class="btn btn-xs btn-default">
+                <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"> 普通
+              </label>
+          </div>
+          
         </div>
         <div class="panel-body">
           <div class="links-left">

@@ -52,9 +52,37 @@ function showLinks() {
     }
 }
 
+function getPrefix(){
+    if($("#simpleUrlMode").get(0).checked){
+        return window.location.protocol + "//" + window.location.host;    
+    }
+    
+    if($("#cdnHost").val()){
+        return $("#cdnHost").val();
+    }
+    return window.location.protocol + "//" + window.location.host;
+}
+
 $(document)
     .ready(
         function() {
+            if(!$("#cdnHost").val()){
+                $("#urlModeGroup").hide();
+            }else{
+                $(".urlMode").change(function(){
+                    if($(".origin-btn").hasClass("active")){
+                        $(".origin-btn").click();
+                    }
+                    if($(".html-btn").hasClass("active")){
+                        $(".html-btn").click();
+                    }
+                    if($(".bb-btn").hasClass("active")){
+                        $(".bb-btn").click();
+                    }
+                });
+            }
+            
+            
             $("#copy_all_btn").click(function(){
                 $("#links-result").focus();
                 $("#links-result").select();
@@ -92,9 +120,10 @@ $(document)
             $(".origin-btn").click(function() {
                 $(this).parent().find("a").removeClass("active");
                 $(this).addClass("active");
+                var prefix = getPrefix();
                 var text = "";
                 $(".img-selected.uploaded").each(function() {
-                    text += $(this).attr("link");
+                    text += prefix+"/"+$(this).attr("filename");
                     text += "\n";
                 });
 
@@ -105,9 +134,10 @@ $(document)
             $(".html-btn").click(function() {
                 $(this).parent().find("a").removeClass("active");
                 $(this).addClass("active");
+                var prefix = getPrefix();
                 var text = "";
                 $(".img-selected.uploaded").each(function() {
-                    text += "<img src='" + $(this).attr("link") + "'>";
+                    text += "<img src='" + prefix+"/"+ $(this).attr("filename") + "'>";
                     text += "\n";
                 });
                 $("#links-result").text(text);
@@ -118,8 +148,9 @@ $(document)
                 $(this).parent().find("a").removeClass("active");
                 $(this).addClass("active");
                 var text = "";
+                var prefix = getPrefix();
                 $(".img-selected.uploaded").each(function() {
-                    text += "[img]" + $(this).attr("link") + "[/img]";
+                    text += "[img]"+ prefix+"/" + $(this).attr("filename") + "[/img]";
                     text += "\n";
                 });
                 $("#links-result").text(text);
@@ -204,11 +235,12 @@ $(document)
                             data.context.removeClass("uploading");
                             data.context.addClass("uploaded");
 
-                            var link = window.location.protocol + "//" + window.location.host + "/" + filename;
+                            var link = getPrefix()  + "/" + filename;
 
                             data.context.find('img').attr("src", link);
 
                             data.context.attr("link", link);
+                            data.context.attr("filename", filename);
                             $(".thumbnail").unbind("click");
                             $(".thumbnail").click(function() {
                                 if ($(this).attr("class").indexOf("img-selected") < 0) {

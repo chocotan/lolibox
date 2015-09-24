@@ -47,27 +47,41 @@ public class LoliBoxConfig {
      */
     private String address = "0.0.0.0";
 
+    private String cdnHost = "";
+
+    private String httpsHost = "";
+
     /**
      * Read config params from command line
      * 
-     * @param args command line args
+     * @param args
+     *            command line args
      */
     private void readParams(String[] args) {
-        ArgumentParser parser = ArgumentParsers.newArgumentParser("").description("A simple image hosting software");
+        ArgumentParser parser = ArgumentParsers.newArgumentParser("")
+                .description("A simple image hosting software");
 
-        parser.addArgument("-p", "--port").metavar("PORT").type(Integer.class).help("Http port to listen on")
-            .dest("port");
+        parser.addArgument("-p", "--port").metavar("PORT").type(Integer.class)
+                .help("Http port to listen on").dest("port");
 
-        parser.addArgument("-a", "--address").metavar("ADDRESS").type(String.class).help("Addresses to listen on")
-            .dest("address");
+        parser.addArgument("-a", "--address").metavar("ADDRESS")
+                .type(String.class).help("Addresses to listen on")
+                .dest("address");
 
         parser.addArgument("-e", "--email").metavar("EMAIL").type(String.class)
-            .help("Admin email to show on the bottom of page").dest("email");
+                .help("Admin email to show on the bottom of page")
+                .dest("email");
 
-        parser.addArgument("-s", "--save").metavar("SAVE").type(String.class).help("Where images saved").dest("save");
+        parser.addArgument("-s", "--save").metavar("SAVE").type(String.class)
+                .help("Where images saved").dest("save");
 
-        parser.addArgument("-pw", "--password").metavar("PASSWORD").type(String.class).help("Password for admin")
-            .dest("password");
+        parser.addArgument("-pw", "--password").metavar("PASSWORD")
+                .type(String.class).help("Password for admin").dest("password");
+
+        parser.addArgument("-cdnHost", "--cdnHost").metavar("CDNHOST")
+                .type(String.class).help("Cdn Host").dest("cdnHost");
+        parser.addArgument("-httpsHost", "--httpsHost").metavar("CHTTPSHOST")
+                .type(String.class).help("Https Host").dest("httpsHost");
 
         try {
             Namespace res = parser.parseArgs(args);
@@ -99,6 +113,16 @@ public class LoliBoxConfig {
                 this.setPassword(password);
             }
 
+            String cdnHost = res.getString("cdnHost");
+            if (cdnHost != null) {
+                this.setCdnHost(cdnHost);
+            }
+
+            String httpsHost = res.getString("httpsHost");
+            if (httpsHost != null) {
+                this.setHttpsHost(httpsHost);
+            }
+            this.setHttpsHost(httpsHost);
         } catch (ArgumentParserException e) {
             parser.handleError(e);
         }
@@ -129,7 +153,8 @@ public class LoliBoxConfig {
         if (StringUtils.isNotBlank(savePath)) {
             setSavePath(savePath);
         } else {
-            setSavePath(System.getProperty("user.home") + File.separator + "lolibox");
+            setSavePath(System.getProperty("user.home") + File.separator
+                    + "lolibox");
         }
         service = new FileSystemStorageService();
     }
@@ -158,7 +183,8 @@ public class LoliBoxConfig {
         if (day < 10) {
             dayStr = "0" + dayStr;
         }
-        String path = year + File.separator + monthStr + File.separator + dayStr;
+        String path = year + File.separator + monthStr + File.separator
+                + dayStr;
 
         String savePath = getSavePath();
         if (savePath.endsWith(File.separator)) {
@@ -235,5 +261,21 @@ public class LoliBoxConfig {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCdnHost() {
+        return cdnHost;
+    }
+
+    public void setCdnHost(String cdnHost) {
+        this.cdnHost = cdnHost;
+    }
+
+    public String getHttpsHost() {
+        return httpsHost;
+    }
+
+    public void setHttpsHost(String httpsHost) {
+        this.httpsHost = httpsHost;
     }
 }
