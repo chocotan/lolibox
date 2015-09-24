@@ -236,8 +236,8 @@ $(document)
                             data.context.addClass("uploaded");
 
                             var link = getPrefix()  + "/" + filename;
-
-                            data.context.find('img').attr("src", link);
+                            var oriLink = window.location.protocol + "//" + window.location.host + "/" + filename;
+                            data.context.find('img').attr("src", oriLink);
 
                             data.context.attr("link", link);
                             data.context.attr("filename", filename);
