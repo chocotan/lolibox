@@ -63,6 +63,7 @@ function getPrefix(){
     return window.location.protocol + "//" + window.location.host;
 }
 
+var count=0;
 $(document)
     .ready(
         function() {
@@ -174,8 +175,9 @@ $(document)
                                 alert("请选择图片文件！");
                                 return;
                             }
-
+                            
                             var tpl = $('<div class="img-float thumbnail"><img class="thumb" alt=""><div class="name-div"></div><div class="progress-div"></div></div></div>');
+                            data.context = tpl.appendTo($("#fileList"));
 
                             // Append the file name and file size
                             if (!data.files[0].name) {
@@ -193,7 +195,6 @@ $(document)
                                 $(img).attr("src", base64);
 
                                 // Add the HTML to the UL element
-                                data.context = tpl.appendTo($("#fileList"));
                                 tpl.find('.name-div').hide();
                                 tpl.find('.name-div').css("width", $(img).width());
                                 tpl.find('.name-div').show();
