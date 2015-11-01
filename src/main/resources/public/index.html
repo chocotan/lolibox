@@ -16,8 +16,8 @@
 <body>
 <div class="header">
     <div id="hidden-block">
-        <input type="hidden" id="cdnHost" value="${cdnHost}">
-        <input type="hidden" id="httpsHost" value="${httpsHost}">
+        <input type="hidden" id="cdnHost" value="@cdnHost@">
+        <input type="hidden" id="httpsHost" value="@httpsHost@">
     </div>
     <nav id="top" class="navbar navbar-default navbar-static-top  navbar-fixed-top" role="navigation">
         <div class="container">
@@ -136,10 +136,10 @@
 <div class="footer">
     <div class="container">
         <p>
-            <a href="" data-toggle="modal" data-target="#terms">使用条款</a>&nbsp;|&nbsp;<a href="mailto:${email}"
+            <a href="" data-toggle="modal" data-target="#terms">使用条款</a>&nbsp;|&nbsp;<a href="mailto:@email@"
                                                                                         target="_blank">联系我</a> <br/>
-            Powered by <a href="${project.url}"
-                          target="_blank">${name}-${project.version}</a>
+            Powered by <a href="@project.url@"
+                          target="_blank">@project.name@-@project.version@</a>
         </p>
     </div>
 </div>

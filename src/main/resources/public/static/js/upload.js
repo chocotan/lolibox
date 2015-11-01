@@ -57,7 +57,7 @@ function getPrefix(){
         return window.location.protocol + "//" + window.location.host;    
     }
     
-    if($("#cdnHost").val()&&$("#cdnHost").val()!="${cdnHost}"){
+    if($("#cdnHost").val()&&$("#cdnHost").val()!="@cdnHost@"){
         return $("#cdnHost").val();
     }
     return window.location.protocol + "//" + window.location.host;
@@ -67,7 +67,7 @@ var count=0;
 $(document)
     .ready(
         function() {
-            if((!$("#cdnHost").val())||$("#cdnHost").val()=="${cdnHost}"){
+            if((!$("#cdnHost").val())||$("#cdnHost").val()=="@cdnHost@"){
                 $("#urlModeGroup").hide();
             }else{
                 $(".urlMode").change(function(){
