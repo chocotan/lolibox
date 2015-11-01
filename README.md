@@ -22,16 +22,29 @@ java -jar Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 
 * Replace `x.y.z-SNAPSHOT` with the version you downloaded
 
-####Optional params
-
+####Configuration
 ```
-[-p PORT] [-a ADDRESS] [-e EMAIL] [-s SAVE] [-pw PASSWORD]
+## Server port
+server.port=8080
+## Server address
+# server.address=
 
-  -p PORT, --port PORT    http port, default port is `8888`
-  -a ADDRESS, --address   address to listen on，default is `0.0.0.0`
-  -e EMAIL, --email EMAIL admin email to show on the bottom of index page
-  -s SAVE, --save SAVE    where images save, default is `${user.home}/lolibox`
-  -pw PASSWORD, --password PASSWORD password for admin, default passwd is `admin`
+## Max upload size
+multipart.max-file-size=20MB
+
+## Admin page
+## management.context-path=/admin/
+
+## Where images save
+imageFolder=/home/choco/lolibox/
+
+## Your email address
+email=loli@linux.com
+## Passwd for login
+password=admin
+## CDN address
+# cdnHost=https://c.hime.io
+
 ```
 
 ###Build from github
