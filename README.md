@@ -52,7 +52,7 @@ password=admin
 
 ###Build from github
 ####Environment
-1. Java 1.6
+1. Java 1.8
 2. Maven 3
 
 ####Commands
