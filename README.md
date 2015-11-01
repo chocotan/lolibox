@@ -59,8 +59,8 @@ password=admin
 ```
 git clone https://github.com/chocotan/lolibox.git
 cd lolibox
-mvn clean package assembly:single
-java -jar target/Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
+mvn clean package
+./target/lolibox-x.y.z-SNAPSHOT.jar
 ```
 
 ####Screenshots
