@@ -23,6 +23,9 @@ java -jar Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
 * Replace `x.y.z-SNAPSHOT` with the version you downloaded
 
 ####Configuration
+
+Config file `application.properties` is in `lolibox/src/main/resources/`
+
 ```
 ## Server port
 server.port=8080
