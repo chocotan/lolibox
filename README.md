@@ -7,7 +7,7 @@ A simple, fast image hosting software
 http://hime.io/
 
 ###Environment
-Java 1.6 or above
+Java 1.8
 
 
 ###Run
