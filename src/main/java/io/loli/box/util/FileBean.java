@@ -1,10 +1,9 @@
 package io.loli.box.util;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class FileBean implements Serializable {

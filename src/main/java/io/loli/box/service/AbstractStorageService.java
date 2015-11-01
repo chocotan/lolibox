@@ -14,7 +14,6 @@ public abstract class AbstractStorageService implements StorageService {
         return upload(new BufferedInputStream(new FileInputStream(file)), file.getName());
     }
 
-    @Override
     public abstract String upload(InputStream is, String filename) throws IOException;
 
     public static StorageService getDefaultInstance() {

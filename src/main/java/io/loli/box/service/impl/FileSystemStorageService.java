@@ -1,8 +1,10 @@
 package io.loli.box.service.impl;
 
 import io.loli.box.service.AbstractStorageService;
-import io.loli.box.startup.LoliBoxConfig;
 import io.loli.box.util.FileUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,14 +13,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
+@Component
 public class FileSystemStorageService extends AbstractStorageService {
     private static List<SuffixBean> suffixes = new ArrayList<SuffixBean>();
-
-    private static LoliBoxConfig config = LoliBoxConfig.getInstance();
 
     static {
         suffixes.add(new SuffixBean("jpg"));
@@ -33,18 +33,58 @@ public class FileSystemStorageService extends AbstractStorageService {
         suffixes.add(new SuffixBean("BMP"));
     }
 
+    @Value(value = "${imageFolder}")
+    private String path;
+
     @Override
     public String upload(InputStream is, String filename) throws IOException {
         String suffix = FileUtil.getSuffix(filename);
         if (!suffixes.contains(new SuffixBean(suffix))) {
             throw new IllegalArgumentException("File you uploaded is not an image.");
         }
-        String savePath = config.getSavePath();
-        String saveDate = config.getCurrentSaveDate();
+        String savePath = path;
+        String saveDate = getCurrentSaveDate();
         String name = FileUtil.getFileName() + (suffix.equals("") ? "" : "." + suffix);
         Path targetPath = new File(savePath + File.separator + saveDate, name).toPath();
         Files.copy(is, targetPath);
         return saveDate + "/" + name;
+    }
+
+    /**
+     * Get folder for today and will create it if not exist
+     *
+     * @return generated date folder
+     */
+    public String getCurrentSaveDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+
+        // I don't known why calendar start with 0
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String monthStr = String.valueOf(month);
+        if (month < 10) {
+            monthStr = "0" + monthStr;
+        }
+        String dayStr = String.valueOf(day);
+        if (day < 10) {
+            dayStr = "0" + dayStr;
+        }
+        String path = year + File.separator + monthStr + File.separator
+                + dayStr;
+
+        String savePath = this.path;
+        if (savePath.endsWith(File.separator)) {
+        } else {
+            savePath += File.separator;
+        }
+        savePath += path;
+        File file = new File(savePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        return path;
     }
 
     final static class SuffixBean {
@@ -83,12 +123,10 @@ public class FileSystemStorageService extends AbstractStorageService {
         }
     }
 
-    @Override
     public List<File> getYears() {
         return Arrays.asList(this.getRootFile().listFiles());
     }
 
-    @Override
     public List<File> getMonthsByYear(String year) {
         String rootFolderString = this.getRootFileString();
         String yearFolderString = rootFolderString + File.separator + year;
@@ -96,7 +134,6 @@ public class FileSystemStorageService extends AbstractStorageService {
         return Arrays.asList(file.listFiles());
     }
 
-    @Override
     public List<File> getDaysByMonth(String year, String month) {
         String rootFolderString = this.getRootFileString();
         String yearFolderString = rootFolderString + File.separator + year;
@@ -105,7 +142,6 @@ public class FileSystemStorageService extends AbstractStorageService {
         return Arrays.asList(file.listFiles());
     }
 
-    @Override
     public List<File> getFilesByDay(String year, String month, String day) {
         if (StringUtils.isBlank(year)) {
             return this.getYears();
@@ -127,22 +163,22 @@ public class FileSystemStorageService extends AbstractStorageService {
         }
 
         throw new IllegalArgumentException("Parameter is not illegal:" + "year=" + year + ", month=" + month + ", day="
-            + day);
+                + day);
 
     }
 
     private File getRootFile() {
-        return new File(config.getSavePath());
+        return new File(path);
     }
 
     private String getRootFileString() {
-        return new File(config.getSavePath()).getPath();
+        return new File(path).getPath();
     }
 
-    @Override
     public void deleteFile(String year, String month, String day, String name) {
-        String path = config.getSavePath() + File.separator + year + File.separator + month + File.separator + day
-            + File.separator + name;
+        String path = this.path
+                + File.separator + year + File.separator + month + File.separator + day
+                + File.separator + name;
         File file = new File(path);
         if (file.exists()) {
             file.delete();
