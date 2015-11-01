@@ -11,16 +11,6 @@ Java 1.6 or above
 
 
 ###Run
-####Download
-* Download from github [Releases](https://github.com/chocotan/lolibox/releases)
-* Download from [百度网盘](http://pan.baidu.com/s/1dDpLenR)
-
-####Commands
-```
-java -jar Lolibox-x.y.z-SNAPSHOT-jar-with-dependencies.jar
-```
-
-* Replace `x.y.z-SNAPSHOT` with the version you downloaded
 
 ####Configuration
 
@@ -28,27 +18,28 @@ Config file `application.properties` is in `lolibox/src/main/resources/`
 
 ```
 ## Server port
-server.port=8080
+server.port=8888
 ## Server address
 # server.address=
 
 ## Max upload size
 multipart.max-file-size=20MB
 
-## Admin page
+## Advanced admin page
 ## management.context-path=/admin/
 
 ## Where images save
 imageFolder=/home/choco/lolibox/
 
 ## Your email address
-email=loli@linux.com
+email=
 ## Passwd for login
 password=admin
 ## CDN address
-# cdnHost=https://c.hime.io
+# cdnHost=
 
 ```
+
 
 ###Build from github
 ####Environment
@@ -62,6 +53,9 @@ cd lolibox
 mvn clean package
 ./target/lolibox-x.y.z-SNAPSHOT.jar
 ```
+
+Open `http://host:port/admin.html` and login with email/password in application.properties
+to manage images uploaded
 
 ####Screenshots
 http://r.loli.io/2MzeEv.png
