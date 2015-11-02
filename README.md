@@ -17,28 +17,47 @@ Java 1.8
 Config file `application.properties` is in `lolibox/src/main/resources/`
 
 ```
+spring.application.name=lolibox
 ## Server port
-server.port=8888
+server.port=8080
 ## Server address
 # server.address=
-
 ## Max upload size
 multipart.max-file-size=20MB
-
-## Advanced admin page
-## management.context-path=/admin/
-
-## Where images save
-imageFolder=/home/choco/lolibox/
-
-## Your email address
-email=
-## Passwd for login
+## Advanced management path 
+# management.context-path=/admin/
+## Your email
+email=you@email.com
+## Your password
 password=admin
-## CDN address
+## Another path for CDN
 # cdnHost=
 
+## storage.type can be 'filesystem', 'aliyun'
+storage.type=filesystem
+## Where images saved while storage.type is 'filesystem'
+imageFolder=/home/choco/lolibox/
+
+## aliyun cloud storage settings
+#storage.aliyun.url=
+#storage.aliyun.key=
+#storage.aliyun.secret=
+#storage.aliyun.name=
 ```
+
+####Configuration for Aliyun OSS Cloud Storage
+
+```
+storage.type=aliyun
+
+## aliyun cloud storage settings
+storage.aliyun.url=aliyun.url
+storage.aliyun.key=aliyun.key
+storage.aliyun.secret=aliyun.secret
+storage.aliyun.name=aliyun.bucketname
+```
+You should alse uncomment all lines in application.yml.
+
 
 
 ###Build from github

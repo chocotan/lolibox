@@ -15,6 +15,9 @@ public class FileBean implements Serializable {
     private Date lastModified;
     private boolean file;
 
+    public FileBean() {
+    }
+
     public FileBean(File file) {
         setName(file.getName());
         setLastModified(new Date(file.lastModified()));
