@@ -36,7 +36,7 @@ password=admin
 ## storage.type can be 'filesystem', 'aliyun'
 storage.type=filesystem
 ## Where images saved while storage.type is 'filesystem'
-imageFolder=/home/choco/lolibox/
+storage.filesystem.imageFolder=/home/choco/lolibox/
 
 ## aliyun cloud storage settings
 #storage.aliyun.url=
