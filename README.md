@@ -77,4 +77,5 @@ Open `http://host:port/admin.html` and login with email/password in application.
 to manage images uploaded
 
 ####Screenshots
-http://r.loli.io/2MzeEv.png
+
+![demo](http://r.loli.io/2MzeEv.png)
