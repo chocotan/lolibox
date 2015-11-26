@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 
 /**
@@ -25,7 +26,7 @@ public class ImageController {
     public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile) {
 
         String url;
-        try (InputStream is = imageFile.getInputStream();) {
+        try (InputStream is = new BufferedInputStream(imageFile.getInputStream())) {
             url = service.upload(is, imageFile.getOriginalFilename(), imageFile.getContentType(), imageFile.getSize());
         } catch (Exception e) {
             e.printStackTrace();

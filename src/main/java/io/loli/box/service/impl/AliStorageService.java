@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class AliStorageService extends AbstractStorageService {
         meta.setCacheControl("max-age: " + 3600 * 1000 * 48);
         meta.setContentEncoding("UTF-8");
         meta.setLastModified(new Date());
-        client.putObject(name, filename, new BufferedInputStream(is), meta);
+        client.putObject(name, filename, is, meta);
         return filename;
     }
 

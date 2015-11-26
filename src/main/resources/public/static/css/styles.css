@@ -43,14 +43,14 @@
 }
 
 body {
-    
+
 }
 
 .uploader-form-file {
     display: none !important;
 }
 
-#fileList>li {
+#fileList > li {
     list-style: none;
     margin: 0 -30px;
 }
@@ -62,7 +62,7 @@ body {
 }
 
 .imglist-row {
-    
+
 }
 
 .thumb {
@@ -117,7 +117,7 @@ body {
 
 .uploader-links-container {
     position: fixed;
-    bottom: 5em;
+    bottom: 2.8em;
     z-index: 5;
     right: 0;
     left: 0;
@@ -157,7 +157,6 @@ body {
     line-height: 120%;
 }
 
-
 .hide {
     display: none;
 }
@@ -170,8 +169,6 @@ body {
     z-index: 1;
 }
 
-
-
 .preview-img {
     max-width: 100%;
     max-height: 410px;
@@ -182,7 +179,6 @@ body {
     height: 440px;
 }
 
-
-#hidden-block{
-    display:none;
+#hidden-block {
+    display: none;
 }
