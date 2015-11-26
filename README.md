@@ -36,7 +36,7 @@ password=admin
 ## storage.type can be 'filesystem', 'aliyun'
 storage.type=filesystem
 ## Where images saved while storage.type is 'filesystem'
-imageFolder=/home/choco/lolibox/
+storage.filesystem.imageFolder=/home/choco/lolibox/
 
 ## aliyun cloud storage settings
 #storage.aliyun.url=
@@ -77,4 +77,5 @@ Open `http://host:port/admin.html` and login with email/password in application.
 to manage images uploaded
 
 ####Screenshots
-http://r.loli.io/2MzeEv.png
+
+![demo](http://r.loli.io/2MzeEv.png)
