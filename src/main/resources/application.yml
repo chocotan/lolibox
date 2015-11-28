@@ -3,4 +3,4 @@
 #  routes:
 #    images:
 #      path: /images/**
-#      url: http://hk.hime.io
+#      url: http://your.cloud.host
