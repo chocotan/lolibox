@@ -28,8 +28,6 @@ multipart.max-file-size=20MB
 # management.context-path=/admin/
 ## Your email
 email=you@email.com
-## Your password
-password=admin
 ## Another path for CDN
 # cdnHost=
 

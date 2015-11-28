@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableZuulProxy
 @EnableJpaRepositories
-@Import({MvcConfig.class, SecurityConfig.class})
+@Import({MvcConfig.class})
 public class LoliboxApplication {
     public static void main(String[] args) {
         SpringApplication.run(LoliboxApplication.class, args);
