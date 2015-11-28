@@ -33,7 +33,7 @@ password=admin
 ## Another path for CDN
 # cdnHost=
 
-## storage.type can be 'filesystem', 'aliyun'
+## storage.type can be 'filesystem', 'aliyun', 'qiniu'
 storage.type=filesystem
 ## Where images saved while storage.type is 'filesystem'
 storage.filesystem.imageFolder=/home/choco/lolibox/
@@ -43,6 +43,14 @@ storage.filesystem.imageFolder=/home/choco/lolibox/
 #storage.aliyun.key=
 #storage.aliyun.secret=
 #storage.aliyun.name=
+
+## DB properties
+spring.h2.console.enabled=false
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:h2:file:~/lolibox/db;FILE_LOCK=FS
+spring.datasource.username=sa
+spring.datasource.password=sa
+
 ```
 
 ####Configuration for Aliyun OSS Cloud Storage
@@ -56,8 +64,15 @@ storage.aliyun.key=aliyun.key
 storage.aliyun.secret=aliyun.secret
 storage.aliyun.name=aliyun.bucketname
 ```
-You should alse uncomment all lines in application.yml.
 
+#### Qiniu
+```
+## Qiniu cloud storage settings
+storage.qiniu.key=qiniu.key
+storage.qiniu.secret=qiniu.secret
+storage.qiniu.name=qiniu.bucketname
+```
+You should alse uncomment all lines in application.yml.
 
 
 ###Build from github
