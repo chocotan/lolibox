@@ -5,7 +5,7 @@
 
     <groupId>io.loli</groupId>
     <artifactId>lolibox</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.2.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://github.com/chocotan/lolibox</url>
 
@@ -98,6 +98,11 @@
             <groupId>org.hashids</groupId>
             <artifactId>hashids</artifactId>
             <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
