@@ -1,10 +1,7 @@
 package io.loli.box.service.impl;
 
+import io.loli.box.entity.ImgFile;
 import io.loli.box.service.AbstractStorageService;
-import io.loli.box.util.FileBean;
-import io.loli.box.util.FileUtil;
-import io.loli.box.util.SuffixBean;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
@@ -12,40 +9,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Calendar;
 
 public class FileSystemStorageService extends AbstractStorageService {
-    private static List<SuffixBean> suffixes = new ArrayList<SuffixBean>();
-
-    static {
-        suffixes.add(new SuffixBean("jpg"));
-        suffixes.add(new SuffixBean("jpeg"));
-        suffixes.add(new SuffixBean("gif"));
-        suffixes.add(new SuffixBean("png"));
-        suffixes.add(new SuffixBean("bmp"));
-        suffixes.add(new SuffixBean("JPG"));
-        suffixes.add(new SuffixBean("JPEG"));
-        suffixes.add(new SuffixBean("GIF"));
-        suffixes.add(new SuffixBean("PNG"));
-        suffixes.add(new SuffixBean("BMP"));
-    }
 
     @Value(value = "${storage.filesystem.imgFolder}")
     private String path;
 
     @Override
     public String upload(InputStream is, String filename, String contentType, long length) throws IOException {
-        String suffix = FileUtil.getSuffix(filename);
-        if (!suffixes.contains(new SuffixBean(suffix))) {
-            throw new IllegalArgumentException("File you uploaded is not an image.");
-        }
         String savePath = path;
         String saveDate = getCurrentSaveDate();
-        String name = FileUtil.getFileName() + (suffix.equals("") ? "" : "." + suffix);
-        Path targetPath = new File(savePath + File.separator + saveDate, name).toPath();
+        Path targetPath = new File(savePath + File.separator + saveDate, filename).toPath();
         Files.copy(is, targetPath);
-        return saveDate + "/" + name;
+        return saveDate + "/" + filename;
     }
 
     /**
@@ -85,76 +62,17 @@ public class FileSystemStorageService extends AbstractStorageService {
         return path;
     }
 
-    public List<FileBean> getYears() {
-        return fileToBean(Arrays.asList(this.getRootFile().listFiles()));
-    }
+    public void deleteFile(String name) {
+        ImgFile file = imgFileRepository.findByShortName(name);
 
-    public List<FileBean> getMonthsByYear(String year) {
-        String rootFolderString = this.getRootFileString();
-        String yearFolderString = rootFolderString + File.separator + year;
-        File file = new File(yearFolderString);
-        return fileToBean(Arrays.asList(file.listFiles()));
-    }
-
-    private List<FileBean> fileToBean(List<File> files) {
-        return files.stream().map(file -> {
-            FileBean bean = new FileBean();
-            bean.setFile(true);
-            bean.setLastModified(new Date(file.lastModified()));
-            bean.setName(file.getName());
-            bean.setSize(file.length());
-            return bean;
-        }).collect(Collectors.toList());
-    }
-
-    public List<FileBean> getDaysByMonth(String year, String month) {
-        String rootFolderString = this.getRootFileString();
-        String yearFolderString = rootFolderString + File.separator + year;
-        String monthFolderString = yearFolderString + File.separator + month;
-        File file = new File(monthFolderString);
-        return fileToBean(Arrays.asList(file.listFiles()));
-    }
-
-    public List<FileBean> getFilesByDay(String year, String month, String day) {
-        if (StringUtils.isBlank(year)) {
-            return this.getYears();
-        }
-        if (StringUtils.isNotBlank(year) && StringUtils.isBlank(month)) {
-            return this.getMonthsByYear(year);
-        }
-        if (StringUtils.isNotBlank(year) && StringUtils.isNotBlank(month) && StringUtils.isBlank(day)) {
-            return this.getDaysByMonth(year, month);
-        }
-
-        if (StringUtils.isNotBlank(year) && StringUtils.isNotBlank(month) && StringUtils.isNotBlank(day)) {
-            String rootFolderString = this.getRootFileString();
-            String yearFolderString = rootFolderString + File.separator + year;
-            String monthFolderString = yearFolderString + File.separator + month;
-            String dayFolderString = monthFolderString + File.separator + day;
-            File file = new File(dayFolderString);
-            return fileToBean(Arrays.asList(file.listFiles()));
-        }
-
-        throw new IllegalArgumentException("Parameter is not illegal:" + "year=" + year + ", month=" + month + ", day="
-                + day);
-
-    }
-
-    private File getRootFile() {
-        return new File(path);
-    }
-
-    private String getRootFileString() {
-        return new File(path).getPath();
-    }
-
-    public void deleteFile(String year, String month, String day, String name) {
+        super.deleteFile(name);
         String path = this.path
-                + File.separator + year + File.separator + month + File.separator + day
+                + File.separator + file.getFolder().getId().getYear() + File.separator
+                + file.getFolder().getId().getMonth() + File.separator + file.getFolder().getId().getDay()
                 + File.separator + name;
-        File file = new File(path);
-        if (file.exists()) {
-            file.delete();
+        File f = new File(path);
+        if (f.exists()) {
+            f.delete();
         }
     }
 }

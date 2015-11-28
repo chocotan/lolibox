@@ -2,6 +2,7 @@ package io.loli.box.service;
 
 import io.loli.box.util.FileBean;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -60,5 +61,6 @@ public interface StorageService {
      */
     public List<FileBean> getFilesByDay(String year, String month, String day);
 
-    public void deleteFile(String year, String month, String day, String name);
+    @Transactional
+    public void deleteFile(String name);
 }

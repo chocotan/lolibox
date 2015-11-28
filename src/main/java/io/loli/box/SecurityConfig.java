@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin.html").hasRole("ADMIN").antMatchers("/image/**").permitAll()
                 .and().formLogin()
                 .permitAll().and().logout().permitAll().and().csrf().disable();
+        http.headers().frameOptions().disable();
+
     }
 
     @Autowired

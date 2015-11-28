@@ -12,6 +12,7 @@ public class FileBean implements Serializable {
 
     private long size;
     private String name;
+    private String url;
     private Date lastModified;
     private boolean file;
 
@@ -59,5 +60,13 @@ public class FileBean implements Serializable {
 
     public void setFile(boolean file) {
         this.file = file;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

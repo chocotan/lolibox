@@ -56,7 +56,7 @@ public class AdminController {
                              @RequestParam(value = "day") String day,
                              @RequestParam(value = "name") String name) {
         try {
-            ss.deleteFile(year, month, day, name);
+            ss.deleteFile(name);
         } catch (Exception e) {
             return new StatusBean("error", e.getMessage());
         }

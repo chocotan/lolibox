@@ -20,4 +20,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/images/**").addResourceLocations(
                     "file://" + imgFolder);
     }
+
 }

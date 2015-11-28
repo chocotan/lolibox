@@ -80,4 +80,20 @@ public class FileUtil {
         }
         return beanList;
     }
+
+
+    public static List<SuffixBean> suffixes = new ArrayList<SuffixBean>();
+
+    static {
+        suffixes.add(new SuffixBean("jpg"));
+        suffixes.add(new SuffixBean("jpeg"));
+        suffixes.add(new SuffixBean("gif"));
+        suffixes.add(new SuffixBean("png"));
+        suffixes.add(new SuffixBean("bmp"));
+        suffixes.add(new SuffixBean("JPG"));
+        suffixes.add(new SuffixBean("JPEG"));
+        suffixes.add(new SuffixBean("GIF"));
+        suffixes.add(new SuffixBean("PNG"));
+        suffixes.add(new SuffixBean("BMP"));
+    }
 }
