@@ -25,9 +25,11 @@ server.port=8080
 ## Max upload size
 multipart.max-file-size=20MB
 ## Advanced management path 
-# management.context-path=/admin/
+management.context-path=/admin/
 ## Your email
 email=you@email.com
+password=password
+
 ## Another path for CDN
 # cdnHost=
 
@@ -48,7 +50,6 @@ spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:h2:file:~/lolibox/db;FILE_LOCK=FS
 spring.datasource.username=sa
 spring.datasource.password=sa
-
 ```
 
 ####Configuration for Aliyun OSS Cloud Storage
@@ -91,4 +92,5 @@ to manage images uploaded
 
 ####Screenshots
 
-![demo](http://r.loli.io/2MzeEv.png)
+![抓图162.png](http://c.hime.io/images/la.png)
+

@@ -24,7 +24,6 @@ public class AliStorageService extends AbstractStorageService {
     @Value("${storage.aliyun.name}")
     private String name;
 
-    private String seperator = "/";
     private OSSClient client = null;
 
     @PostConstruct
