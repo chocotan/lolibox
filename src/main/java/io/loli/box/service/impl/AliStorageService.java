@@ -37,8 +37,7 @@ public class AliStorageService extends AbstractStorageService {
         ObjectMetadata meta = new ObjectMetadata();
         meta.setContentLength(length);
         meta.setContentType(contentType);
-        meta.setCacheControl("max-age: " + 3600 * 1000 * 48);
-        meta.setContentEncoding("UTF-8");
+        meta.setCacheControl("max-age=" + 3600 * 1000 * 48);
         meta.setLastModified(new Date());
         client.putObject("images/" + name, filename, is, meta);
         return filename;
