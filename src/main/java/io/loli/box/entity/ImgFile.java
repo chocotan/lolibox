@@ -1,5 +1,6 @@
 package io.loli.box.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -15,6 +16,7 @@ public class ImgFile {
     private Long id;
     private Date createDate;
 
+    @Column(name = "deleted")
     private boolean delete;
     private String originName;
     private String shortName;
