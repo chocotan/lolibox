@@ -53,13 +53,14 @@ public class QiniuStorageService extends AbstractStorageService {
         if (StringUtils.isNotBlank(contentType)) {
             extra.mimeType = contentType;
         }
-        PutRet ret = IoApi.Put(uptoken, filename, is, extra);
+        PutRet ret = IoApi.Put(uptoken, "images/" + filename, is, extra);
         return ret.getKey();
     }
 
     @Override
     public void deleteFile(String filename) {
+        super.deleteFile(filename);
         RSClient client = new RSClient(mac);
-        client.delete(name, filename);
+        client.delete(name, "images/" + filename);
     }
 }

@@ -40,13 +40,13 @@ public class AliStorageService extends AbstractStorageService {
         meta.setCacheControl("max-age: " + 3600 * 1000 * 48);
         meta.setContentEncoding("UTF-8");
         meta.setLastModified(new Date());
-        client.putObject(name, filename, is, meta);
+        client.putObject("images/" + name, filename, is, meta);
         return filename;
     }
 
     @Override
     public void deleteFile(String fileName) {
         super.deleteFile(fileName);
-        client.deleteObject(name, fileName);
+        client.deleteObject(name, "images/" + fileName);
     }
 }

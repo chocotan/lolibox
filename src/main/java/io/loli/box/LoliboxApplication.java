@@ -2,6 +2,7 @@ package io.loli.box;
 
 import io.loli.box.service.StorageService;
 import io.loli.box.service.impl.AliStorageService;
+import io.loli.box.service.impl.BaiduStorageService;
 import io.loli.box.service.impl.FileSystemStorageService;
 import io.loli.box.service.impl.QiniuStorageService;
 import org.hashids.Hashids;
@@ -36,6 +37,8 @@ public class LoliboxApplication {
                 return new FileSystemStorageService();
             case "qiniu":
                 return new QiniuStorageService();
+            case "baidu":
+                return new BaiduStorageService();
         }
         return new FileSystemStorageService();
     }

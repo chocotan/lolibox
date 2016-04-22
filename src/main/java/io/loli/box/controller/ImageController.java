@@ -11,6 +11,7 @@ import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,9 @@ public class ImageController {
 
     @Autowired
     private Hashids hashids;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     @RequestMapping("/upload")
     @ResponseBody
