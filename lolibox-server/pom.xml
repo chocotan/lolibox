@@ -13,6 +13,7 @@
     <groupId>io.loli</groupId>
     <artifactId>lolibox-server</artifactId>
 
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
