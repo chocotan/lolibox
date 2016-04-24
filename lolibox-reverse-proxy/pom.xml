@@ -13,7 +13,7 @@
     <groupId>io.loli</groupId>
     <artifactId>lolibox-reverse-proxy</artifactId>
 
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
