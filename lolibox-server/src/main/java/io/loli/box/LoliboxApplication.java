@@ -49,5 +49,4 @@ public class LoliboxApplication {
                 .toString());
         return hashids;
     }
-
 }
