@@ -72,11 +72,12 @@ storage.qiniu.name=qiniu.bucketname
 ```
 
 #### Baidu cloud storage settings
+```
 storage.baidu.key=baidu.key
 storage.baidu.secret=baidu.secret
 storage.baidu.url=baidu.url
 storage.baidu.name=baidu.bucketname
-
+```
 
 You should alse uncomment all lines in application.yml.
 
