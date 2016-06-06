@@ -22,7 +22,6 @@ public class AdminController {
     @Autowired
     private StorageService ss;
 
-
     private static Comparator<FileBean> fileComparator = new Comparator<FileBean>() {
 
         @Override
@@ -36,6 +35,10 @@ public class AdminController {
                 return -1;
             }
         }
+
+
+
+
 
     };
 

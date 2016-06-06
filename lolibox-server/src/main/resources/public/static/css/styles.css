@@ -8,7 +8,7 @@
     text-align: center;
     border-top: 1px solid rgb(229, 229, 229);
     padding: 0.8em;
-    height: 5em;
+    height: 3em;
     position: fixed;
 }
 
@@ -181,4 +181,9 @@ body {
 
 #hidden-block {
     display: none;
+}
+
+
+.login-img{
+    max-height:80px;
 }
