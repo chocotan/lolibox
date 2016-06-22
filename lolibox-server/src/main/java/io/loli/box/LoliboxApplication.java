@@ -1,10 +1,5 @@
 package io.loli.box;
 
-import io.loli.box.service.StorageService;
-import io.loli.box.service.impl.AliStorageService;
-import io.loli.box.service.impl.BaiduStorageService;
-import io.loli.box.service.impl.FileSystemStorageService;
-import io.loli.box.service.impl.QiniuStorageService;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -30,21 +25,6 @@ public class LoliboxApplication {
     @Value("${storage.type}")
     private String storageType;
 
-    @Bean
-    public StorageService storageService() {
-        switch (storageType) {
-            case "aliyun":
-                return new AliStorageService();
-            case "filesystem":
-                return new FileSystemStorageService();
-            case "qiniu":
-                return new QiniuStorageService();
-            case "baidu":
-                return new BaiduStorageService();
-        }
-        return new FileSystemStorageService();
-    }
-
 
     @Bean
     public Hashids hashids() {
@@ -52,6 +32,4 @@ public class LoliboxApplication {
                 .toString());
         return hashids;
     }
-
-
 }

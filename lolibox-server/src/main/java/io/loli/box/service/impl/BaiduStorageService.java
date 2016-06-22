@@ -6,7 +6,9 @@ import com.baidubce.services.bos.BosClientConfiguration;
 import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PutObjectResponse;
 import io.loli.box.service.AbstractStorageService;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -15,14 +17,14 @@ import java.io.InputStream;
 /**
  * @author choco
  */
+
+@Component
+@ConditionalOnProperty(name = "storage.type", havingValue = "baidu")
+@ConfigurationProperties(prefix = "storage.baidu")
 public class BaiduStorageService extends AbstractStorageService {
-    @Value("${storage.baidu.url}")
     private String url;
-    @Value("${storage.baidu.key}")
     private String key;
-    @Value("${storage.baidu.secret}")
     private String secret;
-    @Value("${storage.baidu.name}")
     private String name;
 
     private BosClient client;

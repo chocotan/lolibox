@@ -2,7 +2,8 @@ package io.loli.box.service.impl;
 
 import io.loli.box.entity.ImgFile;
 import io.loli.box.service.AbstractStorageService;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,14 +12,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Calendar;
 
+
+@ConditionalOnProperty(name = "storage.type", havingValue = "storage")
+@ConfigurationProperties(prefix = "storage.filesystem")
 public class FileSystemStorageService extends AbstractStorageService {
 
-    @Value(value = "${storage.filesystem.imgFolder}")
-    private String path;
+    private String imgFolder;
 
     @Override
     public String upload(InputStream is, String filename, String contentType, long length) throws IOException {
-        String savePath = path;
+        String savePath = imgFolder;
         String saveDate = getCurrentSaveDate();
         Path targetPath = new File(savePath + File.separator + saveDate, filename).toPath();
         Files.copy(is, targetPath);
@@ -48,7 +51,7 @@ public class FileSystemStorageService extends AbstractStorageService {
         String path = year + File.separator + monthStr + File.separator
                 + dayStr;
 
-        String savePath = this.path;
+        String savePath = this.imgFolder;
         if (savePath.endsWith(File.separator)) {
         } else {
             savePath += File.separator;
@@ -66,7 +69,7 @@ public class FileSystemStorageService extends AbstractStorageService {
         ImgFile file = imgFileRepository.findByShortName(name);
 
         super.deleteFile(name);
-        String path = this.path
+        String path = this.imgFolder
                 + File.separator + file.getFolder().getId().getYear() + File.separator
                 + file.getFolder().getId().getMonth() + File.separator + file.getFolder().getId().getDay()
                 + File.separator + name;

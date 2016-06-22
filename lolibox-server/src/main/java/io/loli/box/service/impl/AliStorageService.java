@@ -3,7 +3,9 @@ package io.loli.box.service.impl;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import io.loli.box.service.AbstractStorageService;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -13,15 +15,14 @@ import java.util.Date;
 /**
  * @author choco
  */
+@Component
+@ConditionalOnProperty(name = "storage.type", havingValue = "aliyun")
+@ConfigurationProperties(prefix = "storage.aliyun")
 public class AliStorageService extends AbstractStorageService {
 
-    @Value("${storage.aliyun.url}")
     private String url;
-    @Value("${storage.aliyun.key}")
     private String key;
-    @Value("${storage.aliyun.secret}")
     private String secret;
-    @Value("${storage.aliyun.name}")
     private String name;
 
     private OSSClient client = null;

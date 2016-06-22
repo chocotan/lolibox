@@ -168,14 +168,6 @@
 
     <repositories>
         <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>opensourceagility-snapshots</id>
             <url>http://repo.opensourceagility.com/snapshots</url>
         </repository>
