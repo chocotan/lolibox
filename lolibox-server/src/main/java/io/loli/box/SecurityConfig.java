@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/image/**").permitAll()
                 .and().formLogin()
                 .permitAll().and().logout().deleteCookies("JSESSIONID").permitAll().and().csrf().disable();
-        http.headers().frameOptions().disable()
+        http.headers().frameOptions().disable().and()
                 .rememberMe();
     }
 
