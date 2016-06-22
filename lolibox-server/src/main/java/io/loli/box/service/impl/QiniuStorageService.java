@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.io.InputStream;
 /**
  * @author choco
  */
-
+@Component
 @ConditionalOnProperty(name = "storage.type", havingValue = "qiniu")
 @ConfigurationProperties(prefix = "storage.qiniu")
 public class QiniuStorageService extends AbstractStorageService {

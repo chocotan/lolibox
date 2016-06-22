@@ -4,6 +4,7 @@ import io.loli.box.entity.ImgFile;
 import io.loli.box.service.AbstractStorageService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Calendar;
 
-
-@ConditionalOnProperty(name = "storage.type", havingValue = "storage")
+@Component
+@ConditionalOnProperty(name = "storage.type", havingValue = "filesystem")
 @ConfigurationProperties(prefix = "storage.filesystem")
 public class FileSystemStorageService extends AbstractStorageService {
 

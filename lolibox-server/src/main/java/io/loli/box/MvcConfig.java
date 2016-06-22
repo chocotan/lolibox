@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ConditionalOnProperty(name = "storage.type", havingValue = "storage")
+@ConditionalOnProperty(name = "storage.type", havingValue = "filesystem")
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Value("${storage.filesystem.imgFolder}")
