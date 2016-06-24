@@ -13,11 +13,8 @@ public class User {
     @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "first_name", length = 100, nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", length = 100, nullable = false)
-    private String lastName;
+    @Column(name = "user_name", length = 100, nullable = true)
+    private String userName;
 
     @Column(name = "password", length = 255)
     private String password;
@@ -42,12 +39,12 @@ public class User {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getId() {
@@ -58,13 +55,6 @@ public class User {
         this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getPassword() {
         return password;

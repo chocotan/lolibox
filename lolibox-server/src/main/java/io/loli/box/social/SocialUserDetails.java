@@ -12,9 +12,9 @@ public class SocialUserDetails extends SocialUser {
 
     private Long id;
 
-    private String firstName;
 
-    private String lastName;
+    private String email;
+
 
     private Role role;
 
@@ -35,9 +35,7 @@ public class SocialUserDetails extends SocialUser {
 
         private String username;
 
-        private String firstName;
-
-        private String lastName;
+        private String email;
 
         private String password;
 
@@ -51,18 +49,8 @@ public class SocialUserDetails extends SocialUser {
             this.authorities = new HashSet<>();
         }
 
-        public Builder firstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
         public Builder id(Long id) {
             this.id = id;
-            return this;
-        }
-
-        public Builder lastName(String lastName) {
-            this.lastName = lastName;
             return this;
         }
 
@@ -89,6 +77,11 @@ public class SocialUserDetails extends SocialUser {
             return this;
         }
 
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
         public Builder username(String username) {
             this.username = username;
             return this;
@@ -96,13 +89,10 @@ public class SocialUserDetails extends SocialUser {
 
         public SocialUserDetails build() {
             SocialUserDetails user = new SocialUserDetails(username, password, authorities);
-
             user.id = id;
-            user.firstName = firstName;
-            user.lastName = lastName;
             user.role = role;
             user.socialSignInProvider = socialSignInProvider;
-
+            user.email = email;
             return user;
         }
     }

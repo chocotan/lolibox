@@ -1,7 +1,13 @@
 package io.loli.box.controller;
 
+import io.loli.box.exception.UserExistsException;
+import io.loli.box.service.impl.UserService;
+import io.loli.box.social.User;
+import org.hashids.Hashids;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -23,6 +30,13 @@ public class LoginController {
 
     @Value("${login.social.enabled}")
     private List<String> loginProviders;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    @Qualifier("invitationCodeHashIds")
+    private Hashids hashids;
 
 
     @RequestMapping("/signin")
@@ -43,12 +57,31 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return signup(registerReq);
         }
-        // validate username and password
+        // validate invitation code
+        try {
+            long[] decoded = hashids.decode(registerReq.getInvitationCode());
+            if (decoded.length == 0) {
+                bindingResult.rejectValue("verificationCode", "Verifycation Error");
+                return signup(registerReq);
+            }
+        } catch (Exception e) {
+            bindingResult.rejectValue("verificationCode", "Verifycation Error");
+            return signup(registerReq);
+        }
 
+        User registered = new User();
+        registered.setEmail(registerReq.getEmail());
+        registered.setUserName(registerReq.getUserName());
+        registered.setPassword(registerReq.getPassword());
+        try {
+            userService.registerNewUser(registered);
+        } catch (UserExistsException e) {
+            bindingResult.rejectValue("email", e.getMessage());
+            return signup(registerReq);
+
+        }
         return "signupResult";
     }
-
-
 }
 
 
@@ -59,6 +92,7 @@ class RegisterReq {
     @Min(3)
     private String password;
     @NotEmpty
+    @NotNull
     @Email
     private String email;
     @NotEmpty

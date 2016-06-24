@@ -15,21 +15,20 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.findByEmail(email);
 
         if (user == null) {
-            throw new UsernameNotFoundException("No user found with username: " + username);
+            throw new UsernameNotFoundException("No user found with username: " + email);
         }
 
         SocialUserDetails principal = SocialUserDetails.getBuilder()
-                .firstName(user.getFirstName())
                 .id(user.getId())
-                .lastName(user.getLastName())
                 .password(user.getPassword())
                 .role(user.getRole())
                 .socialSignInProvider(user.getSignInProvider())
-                .username(user.getEmail())
+                .username(user.getUserName())
+                .email(user.getEmail())
                 .build();
 
         return principal;

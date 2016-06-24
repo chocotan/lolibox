@@ -79,4 +79,12 @@ public class FileSystemStorageService extends AbstractStorageService {
             f.delete();
         }
     }
+
+    public String getImgFolder() {
+        return imgFolder;
+    }
+
+    public void setImgFolder(String imgFolder) {
+        this.imgFolder = imgFolder;
+    }
 }
