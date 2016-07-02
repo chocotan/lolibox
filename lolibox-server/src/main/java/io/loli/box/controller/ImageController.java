@@ -44,6 +44,7 @@ public class ImageController {
     @RequestMapping("/upload")
     public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile) {
 
+        // TODO 同时上传多个文件的时候会失败?
         String url;
         String originName = imageFile.getOriginalFilename();
         String suffix = FileUtil.getSuffix(originName);

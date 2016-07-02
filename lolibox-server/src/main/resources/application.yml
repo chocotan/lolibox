@@ -1,6 +1,64 @@
-# Configuration for cloud storage
-#zuul:
-#  routes:
-#    images:
-#      path: /images/**
-#      url: http://your.cloud.host/images/
+spring.application.name: lolibox
+server.port: 8888
+multipart.max-file-size: 20MB
+management.context-path: /admin/
+
+admin:
+  email: your@email.com
+  anonymous: false
+  signup-invitation: true
+  invitation-seed: lolibox
+
+
+## Another path for CDN
+# cdnHost=
+# imgHost=
+
+storage:
+  type: filesystem
+  filesystem.imgFolder: ${user.home}/lolibox/
+  aliyun:
+    url:
+    key:
+    secret:
+    name:
+  qiniu:
+    key:
+    secret:
+    name:
+  baidu:
+    key:
+    secret:
+    url:
+    name:
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /admin/h2-console
+  jpa:
+    hibernate.ddl-auto: update
+    hibernate.naming_strategy: io.loli.box.CustomNamingStrategy
+  datasource:
+    url: jdbc:h2:file:~/lolibox/db;FILE_LOCK=FS
+    username: sa
+    password: sa
+  messages:
+    basename: i18n/message
+
+
+spring.social.weibo:
+  app-id:
+  app-secret:
+
+
+#login.social.enabled: weibo
+
+---
+spring.profiles: zuul
+zuul:
+  routes:
+    images:
+      path: /images/**
+      url: http://your.cloud.host/images/

@@ -21,13 +21,11 @@ public class UserService {
     @Transactional
     public User registerNewUser(User user) throws UserExistsException {
         if (emailExist(user.getEmail())) {
-            throw new UserExistsException("用户已存在" +
-                    user.getEmail());
+            throw new UserExistsException("email.exists");
         }
 
         if (userNameExist(user.getEmail())) {
-            throw new UserExistsException("已存在" +
-                    user.getUserName());
+            throw new UserExistsException("username.exists");
         }
         return userRepository.save(user);
     }

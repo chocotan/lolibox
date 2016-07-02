@@ -96,4 +96,8 @@ public class SocialUserDetails extends SocialUser {
             return user;
         }
     }
+
+    public String getEmail() {
+        return email;
+    }
 }

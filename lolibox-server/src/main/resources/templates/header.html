@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
-<div class="header"  th:fragment="header">
+<div class="header" th:fragment="header">
     <nav id="top" class="navbar navbar-default navbar-static-top  navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -17,8 +18,14 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/signin">登录</a></li>
-                    <li><a href="/signup">注册</a></li>
+                    <li sec:authorize="hasRole('USER')">
+                        <a href="#" class="title dropdown-toggle" data-toggle="dropdown"><span sec:authentication="principal.email" th:remove="tag"></span><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/logout}" th:text="#{logout}"></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/signin" sec:authorize="!hasRole('USER')">登录</a></li>
+                    <li><a href="/signup" sec:authorize="!hasRole('USER')">注册</a></li>
                 </ul>
             </div>
         </div>

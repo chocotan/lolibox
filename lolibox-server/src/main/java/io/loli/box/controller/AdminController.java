@@ -37,9 +37,6 @@ public class AdminController {
         }
 
 
-
-
-
     };
 
     @RequestMapping("/list")

@@ -1,101 +1,104 @@
 package io.loli.box.controller;
 
+import io.loli.box.AdminProperties;
 import io.loli.box.exception.UserExistsException;
+import io.loli.box.service.InvitationCodeService;
 import io.loli.box.service.impl.UserService;
+import io.loli.box.social.Role;
 import io.loli.box.social.User;
-import org.hashids.Hashids;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * @author choco
  */
 @Controller
 public class LoginController {
-
-
-    @Value("${login.social.enabled}")
-    private List<String> loginProviders;
-
     @Autowired
     private UserService userService;
 
-    @Autowired
-    @Qualifier("invitationCodeHashIds")
-    private Hashids hashids;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private InvitationCodeService invitationCodeService;
+
+    @Autowired
+    private AdminProperties adminProperties;
 
     @RequestMapping("/signin")
     public String signin(Model model) {
-        model.addAttribute("loginProviders", loginProviders);
         return "signin";
     }
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signup(RegisterReq registerReq) {
+    public String signup(RegisterDto registerDto, Model model) {
+        model.addAttribute("adminProperties", adminProperties);
         return "signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signupSubmit(@Valid RegisterReq registerReq, BindingResult bindingResult,
-                               HttpServletRequest request) {
+    public String signupSubmit(@Valid RegisterDto registerDto, BindingResult bindingResult,
+                               RedirectAttributes redirectAttrs, Model model) {
         if (bindingResult.hasErrors()) {
-            return signup(registerReq);
-        }
-        // validate invitation code
-        try {
-            long[] decoded = hashids.decode(registerReq.getInvitationCode());
-            if (decoded.length == 0) {
-                bindingResult.rejectValue("verificationCode", "Verifycation Error");
-                return signup(registerReq);
-            }
-        } catch (Exception e) {
-            bindingResult.rejectValue("verificationCode", "Verifycation Error");
-            return signup(registerReq);
+            return signup(registerDto, model);
         }
 
+        if (adminProperties.isSignupInvitation()) {
+            // validate invitation code
+            try {
+                if (!invitationCodeService.verify(registerDto.getEmail(), registerDto.getInvitationCode())) {
+                    bindingResult.rejectValue("invitationCode", "invitationCode.error");
+                    return signup(registerDto, model);
+                }
+            } catch (Exception e) {
+                bindingResult.rejectValue("invitationCode", "invitationCode.error");
+                return signup(registerDto, model);
+            }
+        }
         User registered = new User();
-        registered.setEmail(registerReq.getEmail());
-        registered.setUserName(registerReq.getUserName());
-        registered.setPassword(registerReq.getPassword());
+        registered.setRole(Role.ROLE_USER);
+        registered.setEmail(registerDto.getEmail());
+        registered.setUserName(registerDto.getUserName());
+        registered.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         try {
             userService.registerNewUser(registered);
         } catch (UserExistsException e) {
             bindingResult.rejectValue("email", e.getMessage());
-            return signup(registerReq);
-
+            return signup(registerDto, model);
         }
-        return "signupResult";
+        redirectAttrs.addAttribute("messages", "signup.success");
+        return "redirect:signin";
     }
 }
 
 
-class RegisterReq {
+class RegisterDto {
     @NotEmpty
+    @NotNull
     private String userName;
     @NotEmpty
-    @Min(3)
+    @Length(min = 6, max = 32)
+    @NotNull
     private String password;
     @NotEmpty
     @NotNull
     @Email
     private String email;
-    @NotEmpty
     private String invitationCode;
 
     public String getEmail() {
