@@ -2,7 +2,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>注册- Lolibox-一个方便、快捷的图床程序</title>
+    <title><span th:text="#{signup}" th:remove="tag"></span>-<span th:text="#{title.desc}" th:remove="tag"></span>
+    </title>
     <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
     <script src="/webjars/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
     <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -18,38 +19,38 @@
 <body>
 <div th:replace="header :: header"></div>
 <div class="login">
-    <form class="form-horizontal login-form" th:object="${registerDto}" th:method="post">
+    <form th:action="@{/signup}" class="form-horizontal login-form" th:object="${registerDto}" th:method="post">
         <div class="page-header">
-            <h2>注册</h2>
+            <h2 th:text="#{signup}"></h2>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
                 <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email"
-                       required="required"  th:field="*{email}"/>
+                       required="required" th:field="*{email}"/>
                 <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputUsername" class="col-sm-2 control-label">昵称</label>
+            <label for="inputUsername" class="col-sm-2 control-label" th:text="#{username}"></label>
             <div class="col-sm-10">
-                <input type="text" name="userName" class="form-control" id="inputUsername" placeholder="昵称"
-                       required="required"  th:field="*{userName}"/>
+                <input type="text" name="userName" class="form-control" id="inputUsername" th:placeholder="#{username}"
+                       required="required" th:field="*{userName}"/>
                 <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">UserName Error</td>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+            <label for="inputPassword3" class="col-sm-2 control-label" th:text="#{password}"></label>
             <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="密码"
+                <input type="password" name="password" class="form-control" id="inputPassword3" th:placeholder="#{password}"
                        required="required" th:field="*{password}"/>
                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
             </div>
         </div>
         <div class="form-group" th:if="${adminProperties.signupInvitation}">
-            <label for="invitationCode" class="col-sm-2 control-label">邀请码</label>
+            <label for="invitationCode" class="col-sm-2 control-label" th:text="#{invitationCode}"></label>
             <div class="col-sm-10">
-                <input type="text" name="invitationCode" class="form-control" id="invitationCode" placeholder="邀请码"
+                <input type="text" name="invitationCode" class="form-control" id="invitationCode" th:placeholder="#{invitationCode}"
                        required="required" th:field="*{invitationCode}"/>
                 <td th:if="${#fields.hasErrors('invitationCode')}" th:errors="*{invitationCode}">InvitationCode Error
                 </td>
@@ -57,16 +58,19 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">注册</button>
+                <button type="submit" class="btn btn-default" th:text="#{signup}"></button>
             </div>
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 
 
-    <!--<form th:attr="action='/signin/'+${provider}" th:each="provider : ${loginProviders}" method="post">
-        <img class="login-img" th:attr=" src='/static/img/logo_'
+    <!--<form th:attr=" action='/signin/' +${provider}
+                " th:each="provider : ${loginProviders}" method="post">
+                <img class="login-img" th:attr=" src='/static/img/logo_'
                         +${provider}+'.png'"/>
-    </form>-->
+    </form>
+    -->
 </div>
 <div th:replace="footer :: footer"></div>
 </body>

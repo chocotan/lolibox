@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lolibox-一个方便、快捷的图床程序</title>
+    <title>Lolibox-<span th:text="#{title.desc}" th:remove="tag"></span></title>
     <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
     <script src="/webjars/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
     <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -13,6 +13,8 @@
     <link href="/static/css/styles.css" rel="stylesheet"/>
     <script src="/static/js/upload.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <div th:replace="header :: header"></div>
@@ -27,13 +29,15 @@
         <div class="uploader-div">
             <form class="uploader-form" method="post" action="image/upload" enctype="multipart/form-data">
                 <div>
-                    <h3>拖动图片到页面上或者</h3>
-                    <a class="btn btn-primary uploader-browse-button">选择图片</a>&nbsp; <input type="file"
-                                                                                            class="uploader-form-file"
-                                                                                            name="image"
-                                                                                            multiple="multiple"/>
+                    <h3 th:text="#{index.dragOr}"></h3>
+                    <a class="btn btn-primary uploader-browse-button" th:text="#{index.selectImage}"></a>&nbsp; <input
+                        type="file"
+                        class="uploader-form-file"
+                        name="image"
+                        multiple="multiple"/>
                 </div>
                 <div id="fileList"></div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             </form>
         </div>
     </div>
@@ -43,11 +47,12 @@
 
         <div class="panel panel-default uploader-links-panel">
             <div class="panel-heading">
-                您选择了<span class="count-result"></span>张图片
-                <button class="btn btn-default btn-xs select-all-btn">全选</button>
-                <button class="btn btn-default btn-xs unselect-all-btn">取消</button>
+                <span th:text="#{index.youSelected}" th:remove="tag"></span> <span class="count-result"></span>
+                <span th:text="#{index.totalImage}" th:remove="tag"></span>
+                <button class="btn btn-default btn-xs select-all-btn"  th:text="#{index.selectAll}"></button>
+                <button class="btn btn-default btn-xs unselect-all-btn"  th:text="#{index.cancel}"></button>
                 <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn"
-                        data-clipboard-target="links-result">复制
+                        data-clipboard-target="links-result" th:text="#{index.copy}">
                 </button>
                 <div class="btn-group" data-toggle="buttons" id="urlModeGroup">
                     <label class="btn btn-xs active btn-default">
@@ -56,7 +61,7 @@
                         CDN
                     </label>
                     <label class="btn btn-xs btn-default">
-                        <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"/> 普通
+                        <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"  th:text="#{index.simple}"/>
                     </label>
                 </div>
 
@@ -64,8 +69,8 @@
             <div class="panel-body">
                 <div class="links-left">
                     <div class="list-group">
-                        <a href="javascript:void(0)" class="list-group-item active origin-btn">原始链接</a> <a
-                            href="javascript:void(0)" class="list-group-item html-btn">HTML代码</a>
+                        <a href="javascript:void(0)" class="list-group-item active origin-btn"  th:text="#{index.originUrl}"></a> <a
+                            href="javascript:void(0)" class="list-group-item html-btn">HTML</a>
                         <a href="javascript:void(0)" class="list-group-item bb-btn">BB CODE</a>
                         <a href="javascript:void(0)" class="list-group-item md-btn">MARKDOWN</a>
                     </div>

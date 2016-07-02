@@ -13,7 +13,7 @@
                 </button>
                 <a class="navbar-brand title" href="/">Lolibox</a>
 
-                <p class="navbar-text">一个方便、快捷的图床程序</p>
+                <p class="navbar-text" th:text="#{title.desc}"></p>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,8 +24,8 @@
                             <li><a th:href="@{/logout}" th:text="#{logout}"></a></li>
                         </ul>
                     </li>
-                    <li><a href="/signin" sec:authorize="!hasRole('USER')">登录</a></li>
-                    <li><a href="/signup" sec:authorize="!hasRole('USER')">注册</a></li>
+                    <li><a href="/signin" sec:authorize="!hasRole('USER')" th:text="#{signin}"></a></li>
+                    <li><a href="/signup" sec:authorize="!hasRole('USER')" th:text="#{signup}"></a></li>
                 </ul>
             </div>
         </div>

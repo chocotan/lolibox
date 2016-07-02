@@ -11,6 +11,7 @@ import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,7 @@ public class ImageController {
     private Hashids hashids;
 
     @RequestMapping("/upload")
+    @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
     public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile) {
 
         // TODO 同时上传多个文件的时候会失败?
