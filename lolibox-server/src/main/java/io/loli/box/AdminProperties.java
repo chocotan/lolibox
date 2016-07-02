@@ -20,6 +20,19 @@ public class AdminProperties {
 
     private String invitationSeed = "lolibox";
 
+    private String imgHost;
+    private String cdnHost;
+
+    private String httpsHost;
+
+    public String getHttpsHost() {
+        return httpsHost;
+    }
+
+    public void setHttpsHost(String httpsHost) {
+        this.httpsHost = httpsHost;
+    }
+
     public boolean isAnonymous() {
         return anonymous;
     }
@@ -51,5 +64,21 @@ public class AdminProperties {
 
     public void setInvitationSeed(String invitationSeed) {
         this.invitationSeed = invitationSeed;
+    }
+
+    public String getCdnHost() {
+        return cdnHost;
+    }
+
+    public void setCdnHost(String cdnHost) {
+        this.cdnHost = cdnHost;
+    }
+
+    public String getImgHost() {
+        return imgHost;
+    }
+
+    public void setImgHost(String imgHost) {
+        this.imgHost = imgHost;
     }
 }

@@ -47,7 +47,7 @@
                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
             </div>
         </div>
-        <div class="form-group" th:if="${adminProperties.signupInvitation}">
+        <div class="form-group" th:if="*{@adminProperties.signupInvitation}">
             <label for="invitationCode" class="col-sm-2 control-label" th:text="#{invitationCode}"></label>
             <div class="col-sm-10">
                 <input type="text" name="invitationCode" class="form-control" id="invitationCode" th:placeholder="#{invitationCode}"

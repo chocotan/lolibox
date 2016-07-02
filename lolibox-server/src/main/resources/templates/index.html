@@ -13,17 +13,15 @@
     <link href="/static/css/styles.css" rel="stylesheet"/>
     <script src="/static/js/upload.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <div th:replace="header :: header"></div>
 
 <div class="main">
     <div id="hidden-block">
-        <input type="hidden" id="cdnHost" value="@cdnHost@"/>
-        <input type="hidden" id="imgHost" value="@imgHost@"/>
-        <input type="hidden" id="httpsHost" value="@httpsHost@"/>
+        <input type="hidden" id="cdnHost" th:value="${@adminProperties.cdnHost}"/>
+        <input type="hidden" id="imgHost" th:value="${@adminProperties.imgHost}"/>
+        <input type="hidden" id="httpsHost" th:value="${@adminProperties.httpsHost}"/>
     </div>
     <div class="container">
         <div class="uploader-div">
@@ -37,7 +35,7 @@
                         multiple="multiple"/>
                 </div>
                 <div id="fileList"></div>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
@@ -49,8 +47,8 @@
             <div class="panel-heading">
                 <span th:text="#{index.youSelected}" th:remove="tag"></span> <span class="count-result"></span>
                 <span th:text="#{index.totalImage}" th:remove="tag"></span>
-                <button class="btn btn-default btn-xs select-all-btn"  th:text="#{index.selectAll}"></button>
-                <button class="btn btn-default btn-xs unselect-all-btn"  th:text="#{index.cancel}"></button>
+                <button class="btn btn-default btn-xs select-all-btn" th:text="#{index.selectAll}"></button>
+                <button class="btn btn-default btn-xs unselect-all-btn" th:text="#{index.cancel}"></button>
                 <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn"
                         data-clipboard-target="links-result" th:text="#{index.copy}">
                 </button>
@@ -61,7 +59,8 @@
                         CDN
                     </label>
                     <label class="btn btn-xs btn-default">
-                        <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"  th:text="#{index.simple}"/>
+                        <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"
+                               th:text="#{index.simple}"/>
                     </label>
                 </div>
 
@@ -69,7 +68,8 @@
             <div class="panel-body">
                 <div class="links-left">
                     <div class="list-group">
-                        <a href="javascript:void(0)" class="list-group-item active origin-btn"  th:text="#{index.originUrl}"></a> <a
+                        <a href="javascript:void(0)" class="list-group-item active origin-btn"
+                           th:text="#{index.originUrl}"></a> <a
                             href="javascript:void(0)" class="list-group-item html-btn">HTML</a>
                         <a href="javascript:void(0)" class="list-group-item bb-btn">BB CODE</a>
                         <a href="javascript:void(0)" class="list-group-item md-btn">MARKDOWN</a>

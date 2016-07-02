@@ -46,8 +46,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signup(RegisterDto registerDto, Model model) {
-        model.addAttribute("adminProperties", adminProperties);
+    public String signup(RegisterDto registerDto) {
         return "signup";
     }
 
@@ -55,7 +54,7 @@ public class LoginController {
     public String signupSubmit(@Valid RegisterDto registerDto, BindingResult bindingResult,
                                RedirectAttributes redirectAttrs, Model model) {
         if (bindingResult.hasErrors()) {
-            return signup(registerDto, model);
+            return signup(registerDto);
         }
 
         if (adminProperties.isSignupInvitation()) {
@@ -63,11 +62,11 @@ public class LoginController {
             try {
                 if (!invitationCodeService.verify(registerDto.getEmail(), registerDto.getInvitationCode())) {
                     bindingResult.rejectValue("invitationCode", "invitationCode.error");
-                    return signup(registerDto, model);
+                    return signup(registerDto);
                 }
             } catch (Exception e) {
                 bindingResult.rejectValue("invitationCode", "invitationCode.error");
-                return signup(registerDto, model);
+                return signup(registerDto);
             }
         }
         User registered = new User();
@@ -79,7 +78,7 @@ public class LoginController {
             userService.registerNewUser(registered);
         } catch (UserExistsException e) {
             bindingResult.rejectValue("email", e.getMessage());
-            return signup(registerDto, model);
+            return signup(registerDto);
         }
         redirectAttrs.addAttribute("messages", "signup.success");
         return "redirect:signin";

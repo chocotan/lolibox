@@ -8,11 +8,8 @@ admin:
   anonymous: false
   signup-invitation: true
   invitation-seed: lolibox
-
-
-## Another path for CDN
-# cdnHost=
-# imgHost=
+  cdnHost:
+  imgHost:
 
 storage:
   type: filesystem
