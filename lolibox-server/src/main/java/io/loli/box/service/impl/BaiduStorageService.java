@@ -35,7 +35,6 @@ public class BaiduStorageService extends AbstractStorageService {
         config.setCredentials(new DefaultBceCredentials(key, secret));
         config.setEndpoint(url);
         client = new BosClient(config);
-
     }
 
     @Override
@@ -52,4 +51,35 @@ public class BaiduStorageService extends AbstractStorageService {
         client.deleteObject(name, "images/" + fileName);
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
