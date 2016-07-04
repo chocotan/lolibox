@@ -7,11 +7,13 @@ import io.loli.box.entity.IdSeq;
 import io.loli.box.entity.ImgFile;
 import io.loli.box.entity.ImgFolder;
 import io.loli.box.service.StorageService;
+import io.loli.box.service.impl.UserService;
 import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,11 +44,13 @@ public class ImageController {
     @Autowired
     private Hashids hashids;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/upload")
     @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
-    public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile) {
+    public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile, UserDetails userDetails) {
 
-        // TODO 同时上传多个文件的时候会失败?
         String url;
         String originName = imageFile.getOriginalFilename();
         String suffix = FileUtil.getSuffix(originName);
@@ -65,6 +69,7 @@ public class ImageController {
             imgFolderRepository.save(folder);
             file.setFolder(folder);
             file.setSize(imageFile.getSize());
+            file.setUser(userService.findByEmailOrName(userDetails.getUsername()));
             imgFileRepository.save(file);
         } catch (Exception e) {
             e.printStackTrace();

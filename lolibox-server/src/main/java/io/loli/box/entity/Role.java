@@ -1,4 +1,4 @@
-package io.loli.box.social;
+package io.loli.box.entity;
 
 public enum Role {
     ROLE_USER("ROLE_USER"), ADMIN("ROLE_ADMIN");

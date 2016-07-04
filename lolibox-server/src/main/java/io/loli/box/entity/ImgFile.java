@@ -23,6 +23,9 @@ public class ImgFile {
     @ManyToOne
     private ImgFolder folder;
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -77,5 +80,13 @@ public class ImgFile {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

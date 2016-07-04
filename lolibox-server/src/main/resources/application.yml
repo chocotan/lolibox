@@ -58,4 +58,4 @@ zuul:
   routes:
     images:
       path: /images/**
-      url: http://your.cloud.host/images/
+      url: 

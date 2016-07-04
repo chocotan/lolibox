@@ -22,6 +22,8 @@ public interface ImgFolderRepository extends JpaRepository<ImgFolder, ImgFolderP
     @Transactional
     @Transient
     public default ImgFolder getCurrentFolder() {
+        synchronized (this) {
+        }
         LocalDate now = LocalDate.now();
         int year = now.getYear();
         int month = now.getMonthValue();
@@ -39,6 +41,7 @@ public interface ImgFolderRepository extends JpaRepository<ImgFolder, ImgFolderP
         return folder;
 
     }
+
     @Query("from ImgFolder f where f.id.year=? and f.id.month=?")
     public List<ImgFolder> findByYearAndMonth(int year, int month);
 }

@@ -149,6 +149,7 @@
                 </configuration>
             </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -165,9 +166,6 @@
                 </excludes>
             </resource>
         </resources>
-        <filters>
-            <filter>src/main/resources/application.properties</filter>
-        </filters>
     </build>
 
     <repositories>

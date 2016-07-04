@@ -1,6 +1,9 @@
 package io.loli.box.social;
 
 import io.loli.box.AdminProperties;
+import io.loli.box.dao.UserRepository;
+import io.loli.box.entity.Role;
+import io.loli.box.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

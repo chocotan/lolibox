@@ -1,8 +1,8 @@
 package io.loli.box.service.impl;
 
 import io.loli.box.exception.UserExistsException;
-import io.loli.box.social.User;
-import io.loli.box.social.UserRepository;
+import io.loli.box.entity.User;
+import io.loli.box.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,14 @@ public class UserService {
             throw new UserExistsException("username.exists");
         }
         return userRepository.save(user);
+    }
+
+    public User findByEmailOrName(String name) {
+        try {
+            return userRepository.findByEmailOrUserName(name, name);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

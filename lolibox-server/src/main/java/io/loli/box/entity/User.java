@@ -1,4 +1,6 @@
-package io.loli.box.social;
+package io.loli.box.entity;
+
+import io.loli.box.social.SocialMediaService;
 
 import javax.persistence.*;
 

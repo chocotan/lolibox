@@ -9,6 +9,7 @@ import java.util.List;
  * @author choco
  */
 @Entity
+@Deprecated
 public class ImgFolder {
     @EmbeddedId
     private ImgFolderPk id;

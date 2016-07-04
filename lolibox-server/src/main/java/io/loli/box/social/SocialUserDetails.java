@@ -1,5 +1,6 @@
 package io.loli.box.social;
 
+import io.loli.box.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.social.security.SocialUser;

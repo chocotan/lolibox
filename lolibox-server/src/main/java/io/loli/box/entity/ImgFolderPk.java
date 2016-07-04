@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * @author choco
  */
+@Deprecated
 public class ImgFolderPk implements Serializable {
     private int year;
     private int month;
