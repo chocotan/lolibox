@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/image/**").permitAll()
                 .and().formLogin().loginPage("/signin").defaultSuccessUrl("/").permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-                .and().csrf();
+                .and().csrf().ignoringAntMatchers("/admin/**");
 
         http.headers().frameOptions().disable().and()
                 .rememberMe();
