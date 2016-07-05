@@ -11,7 +11,7 @@
                     <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                         class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand title" href="/"><span th:text="#{title}" th:remove="tag"/></a>
+                <a class="navbar-brand title" href="/"><span th:utext="#{title}" th:remove="tag"/></a>
 
                 <p class="navbar-text" th:text="#{title.desc}"></p>
             </div>
