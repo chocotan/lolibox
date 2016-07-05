@@ -3,6 +3,10 @@ server.port: 8888
 multipart.max-file-size: 20MB
 management.context-path: /admin/
 
+
+logging:
+  file: ${user.home}/lolibox/lolibox.log
+
 admin:
   email: your@email.com
   anonymous: false
