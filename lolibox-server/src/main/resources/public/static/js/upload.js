@@ -259,7 +259,7 @@ $(document)
 
                             var link = getPrefix() + "/" + filename;
                             var oriLink = window.location.protocol + "//" + window.location.host + "/" + filename;
-                            data.context.find('img').attr("src", oriLink);
+                            data.context.find('img').attr("src", link);
 
                             data.context.attr("link", link);
                             data.context.attr("filename", filename);
