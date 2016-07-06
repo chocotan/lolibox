@@ -28,7 +28,4 @@ public class InvitationCodeServiceImpl implements InvitationCodeService {
         return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Hashids("lolibox2", 20).encode(Math.abs("miao@chun.moe".hashCode()), System.currentTimeMillis()));
-    }
 }

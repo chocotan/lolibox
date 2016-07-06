@@ -6,14 +6,17 @@ import io.loli.box.dao.ImgFolderRepository;
 import io.loli.box.entity.IdSeq;
 import io.loli.box.entity.ImgFile;
 import io.loli.box.entity.ImgFolder;
+import io.loli.box.entity.Role;
 import io.loli.box.service.StorageService;
 import io.loli.box.service.impl.UserService;
+import io.loli.box.social.SocialUserDetails;
 import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +52,7 @@ public class ImageController {
 
     @RequestMapping("/upload")
     @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
-    public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile, UserDetails userDetails) {
+    public StatusBean upload(@RequestParam(value = "image", required = true) MultipartFile imageFile, Authentication authentication) {
 
         String url;
         String originName = imageFile.getOriginalFilename();
@@ -69,7 +72,9 @@ public class ImageController {
             imgFolderRepository.save(folder);
             file.setFolder(folder);
             file.setSize(imageFile.getSize());
-            file.setUser(userService.findByEmailOrName(userDetails.getUsername()));
+            if (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(Role.ROLE_USER.toString()::equals)) {
+                file.setUser(userService.findByEmailOrName(((SocialUserDetails) authentication.getPrincipal()).getEmail()));
+            }
             imgFileRepository.save(file);
         } catch (Exception e) {
             e.printStackTrace();
