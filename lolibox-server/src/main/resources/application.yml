@@ -4,7 +4,13 @@ multipart.max-file-size: 20MB
 management.context-path: /admin/
 
 
+security:
+  headers:
+    cache: true
+  ignored: /webjars/**,/css/**,/js/**,/img/**
 
+spring.resources.chain.strategy.content.enabled: true
+spring.resources.chain.strategy.content.paths: /**
 
 logging:
   file: ${user.home}/lolibox/lolibox.log

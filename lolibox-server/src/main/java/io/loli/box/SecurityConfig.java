@@ -31,6 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
         registry.antMatchers("/admin/**").hasAuthority(Role.ADMIN.toString())
                 .antMatchers("/image/**").permitAll()
+//                .antMatchers("/webjars/**").permitAll()
+//                .antMatchers("/js/**").permitAll()
+//                .antMatchers("/css/**").permitAll()
+//                .antMatchers("/img/**").permitAll()
+
                 .and().formLogin().loginPage("/signin").defaultSuccessUrl("/").permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and().csrf().ignoringAntMatchers("/admin/**");
@@ -44,16 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
     }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**")
-                .antMatchers("/css/**")
-                .antMatchers("/js/**")
-                .antMatchers("/img/**");
-        ;
-    }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
