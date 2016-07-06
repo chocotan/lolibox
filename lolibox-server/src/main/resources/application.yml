@@ -4,6 +4,8 @@ multipart.max-file-size: 20MB
 management.context-path: /admin/
 
 
+
+
 logging:
   file: ${user.home}/lolibox/lolibox.log
 
@@ -48,6 +50,8 @@ spring:
   messages:
     basename: i18n/message
 
+  thymeleaf:
+    cache: false
 
 spring.social.weibo:
   app-id:

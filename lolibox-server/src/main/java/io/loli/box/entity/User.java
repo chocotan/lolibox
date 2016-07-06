@@ -3,6 +3,7 @@ package io.loli.box.entity;
 import io.loli.box.social.SocialMediaService;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_accounts")
@@ -28,6 +29,17 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "sign_in_provider", length = 20)
     private SocialMediaService signInProvider;
+
+    @Column(name = "create_date")
+    private Date createDate = new Date();
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public User() {
 

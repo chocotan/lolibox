@@ -1,87 +1,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title><span th:utext="#{title.htmlTitle}" th:remove="tag"/>-<span th:utext="#{title.desc}" th:remove="tag"></span></title>
-    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
-    <script src="/webjars/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/webjars/jquery-knob/1.2.11/jquery.knob.min.js"></script>
-    <script src="/static/js/jquery.iframe-transport.min.js"></script>
-    <script src="/static/js/jquery.ui.widget.min.js"></script>
-    <script src="/static/js/jquery.fileupload.min.js"></script>
-    <link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/static/css/styles.css" rel="stylesheet"/>
-    <script src="/static/js/upload.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-</head>
-<body>
-<div th:replace="header :: header"></div>
-
-<div class="main">
-    <div id="hidden-block">
-        <input type="hidden" id="cdnHost" th:value="${@adminProperties.cdnHost}"/>
-        <input type="hidden" id="imgHost" th:value="${@adminProperties.imgHost}"/>
-        <input type="hidden" id="httpsHost" th:value="${@adminProperties.httpsHost}"/>
-    </div>
-    <div class="container">
-        <div class="uploader-div">
-            <form class="uploader-form" method="post" action="image/upload" enctype="multipart/form-data">
-                <div>
-                    <h3 th:text="#{index.dragOr}"></h3>
-                    <a class="btn btn-primary uploader-browse-button" th:text="#{index.selectImage}"></a>&nbsp; <input
-                        type="file"
-                        class="uploader-form-file"
-                        name="image"
-                        multiple="multiple"/>
-                </div>
-                <div id="fileList"></div>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            </form>
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<div class="content" layout:fragment="content">
+    <div class="main">
+        <div id="hidden-block">
+            <input type="hidden" id="cdnHost" th:value="${@adminProperties.cdnHost}"/>
+            <input type="hidden" id="imgHost" th:value="${@adminProperties.imgHost}"/>
+            <input type="hidden" id="httpsHost" th:value="${@adminProperties.httpsHost}"/>
+        </div>
+        <div class="container">
+            <div class="uploader-div">
+                <form class="uploader-form" method="post" action="image/upload" enctype="multipart/form-data">
+                    <div>
+                        <h3 th:text="#{index.dragOr}"></h3>
+                        <a class="btn btn-primary uploader-browse-button" th:text="#{index.selectImage}"></a>&nbsp;
+                        <input
+                                type="file"
+                                class="uploader-form-file"
+                                name="image"
+                                multiple="multiple"/>
+                    </div>
+                    <div id="fileList"></div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<div class="uploader-links-container hide">
-    <div class="container ">
+    <div class="uploader-links-container hide">
+        <div class="container ">
 
-        <div class="panel panel-default uploader-links-panel">
-            <div class="panel-heading">
-                <span th:text="#{index.youSelected}" th:remove="tag"></span> <span class="count-result"></span>
-                <span th:text="#{index.totalImage}" th:remove="tag"></span>
-                <button class="btn btn-default btn-xs select-all-btn" th:text="#{index.selectAll}"></button>
-                <button class="btn btn-default btn-xs unselect-all-btn" th:text="#{index.cancel}"></button>
-                <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn"
-                        data-clipboard-target="links-result" th:text="#{index.copy}">
-                </button>
-                <div class="btn-group" data-toggle="buttons" id="urlModeGroup">
-                    <label class="btn btn-xs active btn-default">
-                        <input type="radio" name="urlMode" class="urlMode" id="cdnUrlMode" autocomplete="off"
-                               checked="checked"/>
-                        CDN
-                    </label>
-                    <label class="btn btn-xs btn-default">
-                        <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"
-                               th:text="#{index.simple}"/>
-                    </label>
+            <div class="panel panel-default uploader-links-panel">
+                <div class="panel-heading">
+                    <span th:text="#{index.youSelected}" th:remove="tag"></span> <span class="count-result"></span>
+                    <span th:text="#{index.totalImage}" th:remove="tag"></span>
+                    <button class="btn btn-default btn-xs select-all-btn" th:text="#{index.selectAll}"></button>
+                    <button class="btn btn-default btn-xs unselect-all-btn" th:text="#{index.cancel}"></button>
+                    <button class="btn btn-default btn-xs copy-all-btn" id="copy_all_btn"
+                            data-clipboard-target="links-result" th:text="#{index.copy}">
+                    </button>
+                    <div class="btn-group" data-toggle="buttons" id="urlModeGroup">
+                        <label class="btn btn-xs active btn-default">
+                            <input type="radio" name="urlMode" class="urlMode" id="cdnUrlMode" autocomplete="off"
+                                   checked="checked"/>
+                            CDN
+                        </label>
+                        <label class="btn btn-xs btn-default">
+                            <input type="radio" name="urlMode" class="urlMode" id="simpleUrlMode" autocomplete="off"
+                                   th:text="#{index.simple}"/>
+                        </label>
+                    </div>
+
                 </div>
-
-            </div>
-            <div class="panel-body">
-                <div class="links-left">
-                    <div class="list-group">
-                        <a href="javascript:void(0)" class="list-group-item active origin-btn"
-                           th:text="#{index.originUrl}"></a> <a
-                            href="javascript:void(0)" class="list-group-item html-btn">HTML</a>
-                        <a href="javascript:void(0)" class="list-group-item bb-btn">BB CODE</a>
-                        <a href="javascript:void(0)" class="list-group-item md-btn">MARKDOWN</a>
+                <div class="panel-body">
+                    <div class="links-left">
+                        <div class="list-group">
+                            <a href="javascript:void(0)" class="list-group-item active origin-btn"
+                               th:text="#{index.originUrl}"></a> <a
+                                href="javascript:void(0)" class="list-group-item html-btn">HTML</a>
+                            <a href="javascript:void(0)" class="list-group-item bb-btn">BB CODE</a>
+                            <a href="javascript:void(0)" class="list-group-item md-btn">MARKDOWN</a>
+                        </div>
+                    </div>
+                    <div class="links-right">
+                        <textarea id="links-result" readonly="readonly"></textarea>
                     </div>
                 </div>
-                <div class="links-right">
-                    <textarea id="links-result" readonly="readonly"></textarea>
-                </div>
             </div>
         </div>
     </div>
 </div>
-<div th:replace="footer :: footer"></div>
-</body>
 </html>

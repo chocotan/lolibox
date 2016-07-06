@@ -46,4 +46,5 @@ public class LoliboxApplication {
     public void addAdminPropertiesToContext(ServletContext context, AdminProperties adminProperties) {
         context.setAttribute("adminProperties", adminProperties);
     }
+
 }
