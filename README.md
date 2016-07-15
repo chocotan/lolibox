@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/CIResearchGroup/lolibox.svg?branch=master)](https://travis-ci.org/CIResearchGroup/lolibox)
 Lolibox
 =======
 
