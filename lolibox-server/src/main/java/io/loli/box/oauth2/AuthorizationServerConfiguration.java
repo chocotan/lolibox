@@ -51,13 +51,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // TODO Add JPA Builder
         JdbcClientDetailsServiceBuilder builder = clients
                 .jdbc(ds);
-        FinalValueHolder<ClientDetailsServiceBuilder> detailHolder = new FinalValueHolder<>(builder);
-        this.clients.forEach(c -> detailHolder.setValue(detailHolder.getValue().withClient(c.getName()).secret(c.getSecret())
-                .authorizedGrantTypes("password")
-                .authorities("ROLE_CLIENT")
-                .scopes("read", "write")
-                .resourceIds("oauth2-resource")
-                .accessTokenValiditySeconds(Integer.MAX_VALUE).and()));
+        if (clients != null) {
+            FinalValueHolder<ClientDetailsServiceBuilder> detailHolder = new FinalValueHolder<>(builder);
+            this.clients.forEach(c -> detailHolder.setValue(detailHolder.getValue().withClient(c.getName()).secret(c.getSecret())
+                    .authorizedGrantTypes("password")
+                    .authorities("ROLE_CLIENT")
+                    .scopes("read", "write")
+                    .resourceIds("oauth2-resource")
+                    .accessTokenValiditySeconds(Integer.MAX_VALUE).and()));
+        }
     }
 
     @Override
