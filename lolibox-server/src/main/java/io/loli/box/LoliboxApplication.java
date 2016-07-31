@@ -1,5 +1,7 @@
 package io.loli.box;
 
+import io.loli.box.oauth2.AuthorizationServerConfiguration;
+import io.loli.box.oauth2.ResourceServer;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +20,9 @@ import javax.servlet.ServletContext;
 @SpringBootApplication
 @EnableZuulProxy
 @EnableJpaRepositories
-@Import({MvcConfig.class, SecurityConfig.class})
+@Import({MvcConfig.class, SecurityConfig.class, AuthorizationServerConfiguration.class, ResourceServer.class})
 @EnableSocial
-@EntityScan
+@EntityScan("io.loli.box.entity")
 public class LoliboxApplication {
     public static void main(String[] args) {
         SpringApplication.run(LoliboxApplication.class, args);

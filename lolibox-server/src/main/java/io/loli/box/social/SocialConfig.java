@@ -2,6 +2,7 @@ package io.loli.box.social;
 
 import io.loli.box.social.SimpleSignInAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import org.springframework.social.connect.jpa.JpaTemplate;
 import org.springframework.social.connect.jpa.JpaUsersConnectionRepository;
 import org.springframework.social.connect.jpa.hibernate.UserConnectionDao;
 import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.security.SocialAuthenticationProvider;
 
 import javax.sql.DataSource;
 
@@ -33,6 +35,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("org.springframework.social.connect.jpa.hibernate")
 @EntityScan("org.springframework.social.connect.jpa.hibernate")
+@ConditionalOnBean(SocialAuthenticationProvider.class)
 public class SocialConfig implements SocialConfigurer {
     @Autowired
     private DataSource dataSource;

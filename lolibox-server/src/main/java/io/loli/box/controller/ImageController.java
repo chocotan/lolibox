@@ -86,4 +86,12 @@ public class ImageController {
             return new StatusBean("error", "Failed to upload");
         }
     }
+
+
+
+    @RequestMapping("/oauthUpload")
+    public StatusBean oauthUpload(@RequestParam(value = "image", required = true) MultipartFile imageFile, Authentication authentication) {
+        return upload(imageFile,authentication);
+    }
+
 }

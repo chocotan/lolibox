@@ -9,16 +9,25 @@ security:
     cache: true
   ignored: /webjars/**,/css/**,/js/**,/img/**
 
+#oauth2:
+#  clients:
+#    -
+#      name: test-client
+#      secret: test-password
+
+
 spring.resources.chain.strategy.content.enabled: true
 spring.resources.chain.strategy.content.paths: /**
 
 logging:
   file: ${user.home}/lolibox/lolibox.log
-
+  level.io.loli: debug
+  pattern:
+    level:
 admin:
   email: your@email.com
   anonymous: false
-  signup-invitation: true
+  signup-invitation: false
   invitation-seed: lolibox
   cdnHost:
   imgHost:
@@ -64,6 +73,8 @@ spring.social.weibo:
   app-secret:
 
 
+
+
 #login.social.enabled: weibo
 
 ---
@@ -72,4 +83,5 @@ zuul:
   routes:
     images:
       path: /images/**
-      url: 
+      url:
+
