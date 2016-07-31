@@ -1,5 +1,6 @@
 package io.loli.box.oauth2;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -18,6 +19,7 @@ public class OauthClientDetails {
     private String authorities;
     private Integer accessTokenValidity;
     private Integer refreshTokenValidity;
+    @Column(length = 4096)
     private String additionalInformation;
     private String autoapprove;
 

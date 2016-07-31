@@ -2,6 +2,7 @@ package io.loli.box.oauth2;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  * @author choco
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 public class OauthRefreshToken {
     @Id
     private String tokenId;
+    @Lob
     private String token;
+    @Lob
     private String authentication;
 
     public String getAuthentication() {
