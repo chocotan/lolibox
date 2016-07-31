@@ -3,6 +3,8 @@ Lolibox
 
 A simple, fast image hosting software
 
+This is a sample project of spring-boot in fact %>_<%
+
 ###DEMO
 http://hime.io/
 
