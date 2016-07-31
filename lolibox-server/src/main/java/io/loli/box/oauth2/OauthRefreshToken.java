@@ -1,11 +1,12 @@
 package io.loli.box.oauth2;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
  * @author choco
  */
-//@Entity
+@Entity
 public class OauthRefreshToken {
     @Id
     private String tokenId;
