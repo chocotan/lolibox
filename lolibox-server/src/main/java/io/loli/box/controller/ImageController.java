@@ -12,6 +12,7 @@ import io.loli.box.service.impl.UserService;
 import io.loli.box.social.SocialUserDetails;
 import io.loli.box.util.FileUtil;
 import io.loli.box.util.StatusBean;
+import org.apache.commons.lang3.StringUtils;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.Date;
 
 /**
@@ -61,7 +63,14 @@ public class ImageController {
         try (InputStream is = new BufferedInputStream(imageFile.getInputStream())) {
             Long id = idSeqRepository.save(new IdSeq()).getId();
             String name = hashids.encode(id) + ".".concat(suffix);
-            url = service.upload(is, name, imageFile.getContentType(), imageFile.getSize());
+            String contentType = imageFile.getContentType();
+            if (StringUtils.isBlank(contentType)) {
+                contentType = URLConnection.guessContentTypeFromName(originName);
+            }
+            if (StringUtils.isBlank(contentType)) {
+                contentType = "image/png";
+            }
+            url = service.upload(is, name, contentType, imageFile.getSize());
             ImgFile file = new ImgFile();
             file.setCreateDate(new Date());
             file.setId(id);
@@ -88,10 +97,9 @@ public class ImageController {
     }
 
 
-
     @RequestMapping("/oauthUpload")
     public StatusBean oauthUpload(@RequestParam(value = "image", required = true) MultipartFile imageFile, Authentication authentication) {
-        return upload(imageFile,authentication);
+        return upload(imageFile, authentication);
     }
 
 }
