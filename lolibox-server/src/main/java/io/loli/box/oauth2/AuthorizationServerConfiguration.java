@@ -51,7 +51,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // TODO Add JPA Builder
         JdbcClientDetailsServiceBuilder builder = clients
                 .jdbc(ds);
-        if (clients != null) {
+        if (this.clients != null) {
             FinalValueHolder<ClientDetailsServiceBuilder> detailHolder = new FinalValueHolder<>(builder);
             this.clients.forEach(c -> detailHolder.setValue(detailHolder.getValue().withClient(c.getName()).secret(c.getSecret())
                     .authorizedGrantTypes("password")
