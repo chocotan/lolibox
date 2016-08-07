@@ -1,10 +1,8 @@
 package io.loli.box.social;
 
-import io.loli.box.social.SimpleSignInAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +17,8 @@ import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.jpa.JpaTemplate;
 import org.springframework.social.connect.jpa.JpaUsersConnectionRepository;
-import org.springframework.social.connect.jpa.hibernate.UserConnectionDao;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.security.SocialAuthenticationProvider;
 

@@ -1,6 +1,6 @@
 spring.application.name: lolibox
 server.port: 8888
-multipart.max-file-size: 20MB
+spring.http.multipart.max-file-size: 20MB
 management.context-path: /admin/
 
 
@@ -56,8 +56,10 @@ spring:
       enabled: true
       path: /admin/h2-console
   jpa:
-    hibernate.ddl-auto: update
-    hibernate.naming_strategy: io.loli.box.CustomNamingStrategy
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: io.loli.box.CustomNamingStrategy
   datasource:
     url: jdbc:h2:file:~/lolibox/db;FILE_LOCK=FS
     username: sa
