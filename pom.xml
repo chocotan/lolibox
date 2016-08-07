@@ -76,5 +76,5 @@
     <modules>
         <module>lolibox-server</module>
         <module>lolibox-reverse-proxy</module>
-    </modules>s
+    </modules>
 </project>
