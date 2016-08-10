@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title><span th:utext="#{images.title}" th:remove="tag"></span></title>
+</head>
+
+<body>
+
+<div class="content" layout:fragment="content">
+    <div class="images">
+        <div class="page-header">
+            <h2><span th:utext="#{images.title}" th:remove="tag"></span></h2>
+        </div>
+        <table class="table table-condensed" id="images-table" tyle="table-layout:fixed ;overflow:hidden;">
+            <thead>
+            <tr>
+                <th><span th:utext="#{images.uploadDate}" th:remove="tag"></span></th>
+                <th><span th:utext="#{images.name}" th:remove="tag"></span></th>
+                <th><span th:utext="#{images.action}" th:remove="tag"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="img : ${images}">
+                <td class="images-date-td" th:text="${img.createDate}"></td>
+                <td class="images-name-td"><span th:class="img-name-label" th:text="${img.originName}" th:remove="tag"
+                                                 th:title="${img.originName}"></span></td>
+                <td><a th:href="|${@adminProperties.imgHost}/user/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="page">
+            <nav>
+                <ul class="pagination">
+                    <li th:class="${not images.hasPrevious()}? disabled:''">
+                        <a th:href="@{/user/images(page=${images.number-1},size=15)}" aria-label="Previous" th:class="${not images.hasPrevious()}? disabled:''">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:class="${images.number==(i-1)}? active:''"
+                        th:each="i:${#numbers.sequence( 1, images.totalPages)}"><a th:href="@{/user/images(page=${i-1},size=15)}" th:text="${i}"></a></li>
+                    <li th:class="${not images.hasNext()}? disabled:''">
+                        <a th:href="@{/user/images(page=${images.number+1},size=15)}" aria-label="Next"  th:class="${not images.hasNext()}? disabled:''">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

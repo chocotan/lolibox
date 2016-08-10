@@ -202,3 +202,44 @@ body {
 }
 
 
+
+
+/*images page*/
+
+#images-table {
+    margin: auto;
+}
+
+.images {
+    display: block;
+    margin: 90px auto auto auto;
+    width: 80%;
+    min-width: 500px;
+    max-width: 900px;
+    /*margin-left: auto;*/
+}
+
+.images-name-td {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.images-date-td {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.page{
+    padding-bottom: 100px;
+}
+
+/*images page end*/

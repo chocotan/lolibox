@@ -21,6 +21,7 @@
                     <li sec:authorize="hasRole('USER')">
                         <a href="#" class="title dropdown-toggle" data-toggle="dropdown"><span sec:authentication="principal.email" th:remove="tag"></span><b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li><a th:href="@{/user/images}" th:text="#{myImages}"></a></li>
                             <li><a th:href="@{/logout}" th:text="#{logout}"></a></li>
                         </ul>
                     </li>
