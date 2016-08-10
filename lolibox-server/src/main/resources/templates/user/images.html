@@ -26,7 +26,7 @@
                 <td class="images-date-td" th:text="${img.createDate}"></td>
                 <td class="images-name-td"><span th:class="img-name-label" th:text="${img.originName}" th:remove="tag"
                                                  th:title="${img.originName}"></span></td>
-                <td><a th:href="|${@adminProperties.imgHost}/user/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a></td>
+                <td><a th:href="|${@adminProperties.imgHost}/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a></td>
             </tr>
             </tbody>
         </table>
