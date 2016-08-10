@@ -3,7 +3,7 @@ Lolibox
 [![Build Status](https://drone.io/github.com/chocotan/lolibox/status.png)](https://drone.io/github.com/chocotan/lolibox/latest)  [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/chocotan/lolibox/master/LICENSE)
 
 
-A simple, fast image hosting software
+A simple, fast image hosting application
 
 This is a sample project of spring-boot in fact %>_<%
 
