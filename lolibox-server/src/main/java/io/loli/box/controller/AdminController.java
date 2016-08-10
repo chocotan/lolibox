@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * @author choco
@@ -38,16 +36,6 @@ public class AdminController {
 
 
     };
-
-    @RequestMapping("/list")
-    @ResponseBody
-    public List<FileBean> list(@RequestParam(value = "year", required = false) String year,
-                               @RequestParam(value = "month", required = false) String month,
-                               @RequestParam(value = "day", required = false) String day) {
-        List<FileBean> files = ss.getFilesByDay(year, month, day);
-        Collections.sort(files, fileComparator);
-        return files;
-    }
 
     @RequestMapping("/delete")
     @ResponseBody

@@ -7,6 +7,7 @@ import io.loli.box.service.impl.UserService;
 import io.loli.box.social.SocialUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,14 @@ public class UserController {
 
 
     @RequestMapping("/user/images")
+    @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
     public String imagesRedirect() {
         return "redirect:/user/images?page=0&size=15";
     }
 
 
     @RequestMapping(value = "/user/images",params = "page")
+    @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
     public String myImages(Model model, Authentication authentication, Pageable page) {
 
         User user = null;

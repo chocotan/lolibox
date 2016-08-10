@@ -21,9 +21,6 @@ public class ImgFile {
     private long size;
 
     @ManyToOne
-    private ImgFolder folder;
-
-    @ManyToOne
     private User user;
 
     public Long getId() {
@@ -64,14 +61,6 @@ public class ImgFile {
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
-    }
-
-    public ImgFolder getFolder() {
-        return folder;
-    }
-
-    public void setFolder(ImgFolder folder) {
-        this.folder = folder;
     }
 
     public long getSize() {

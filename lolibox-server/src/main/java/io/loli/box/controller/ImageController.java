@@ -2,10 +2,8 @@ package io.loli.box.controller;
 
 import io.loli.box.dao.IdSeqRepository;
 import io.loli.box.dao.ImgFileRepository;
-import io.loli.box.dao.ImgFolderRepository;
 import io.loli.box.entity.IdSeq;
 import io.loli.box.entity.ImgFile;
-import io.loli.box.entity.ImgFolder;
 import io.loli.box.entity.Role;
 import io.loli.box.service.StorageService;
 import io.loli.box.service.impl.UserService;
@@ -44,9 +42,6 @@ public class ImageController {
     private ImgFileRepository imgFileRepository;
 
     @Autowired
-    private ImgFolderRepository imgFolderRepository;
-
-    @Autowired
     private Hashids hashids;
 
     @Autowired
@@ -76,10 +71,6 @@ public class ImageController {
             file.setId(id);
             file.setOriginName(originName);
             file.setShortName(url);
-            ImgFolder folder = imgFolderRepository.getCurrentFolder();
-            folder.setImgCount(folder.getImgCount() + 1);
-            imgFolderRepository.save(folder);
-            file.setFolder(folder);
             file.setSize(imageFile.getSize());
             if (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(Role.ROLE_USER.toString()::equals)) {
                 file.setUser(userService.findByEmailOrName(((SocialUserDetails) authentication.getPrincipal()).getEmail()));
