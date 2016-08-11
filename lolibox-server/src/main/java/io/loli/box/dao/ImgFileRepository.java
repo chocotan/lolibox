@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public interface ImgFileRepository extends JpaRepository<ImgFile, Long> {
     Page<ImgFile> findByUserIdOrderByCreateDateDesc(Long userId, Pageable pageable);
 
 
-    List<ImgFile> findByGreenStatus(Integer greenStatus);
+    List<ImgFile> findByGreenStatus(Integer greenStatus, Date from, Date end);
 
 
     @Transactional
