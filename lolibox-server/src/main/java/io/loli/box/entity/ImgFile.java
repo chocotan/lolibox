@@ -18,6 +18,11 @@ public class ImgFile {
     private String originName;
     private String shortName;
 
+    // 0-initial 1-upload  2-upload error  3-porn  4-check error  5=normal
+    private Integer greenStatus = 0;
+    private Float greenPoint;
+    private String greenTaskId;
+
     private long size;
 
     @ManyToOne
@@ -77,5 +82,32 @@ public class ImgFile {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public Integer getGreenStatus() {
+        return greenStatus;
+    }
+
+    public void setGreenStatus(Integer greenStatus) {
+        this.greenStatus = greenStatus;
+    }
+
+
+    public Float getGreenPoint() {
+        return greenPoint;
+    }
+
+    public void setGreenPoint(Float greenPoint) {
+        this.greenPoint = greenPoint;
+    }
+
+
+    public String getGreenTaskId() {
+        return greenTaskId;
+    }
+
+    public void setGreenTaskId(String greenTaskId) {
+        this.greenTaskId = greenTaskId;
     }
 }

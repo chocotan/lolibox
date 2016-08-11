@@ -72,7 +72,7 @@ public class ImageController {
             file.setOriginName(originName);
             file.setShortName(url);
             file.setSize(imageFile.getSize());
-            if (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(Role.ROLE_USER.toString()::equals)) {
+            if (authentication != null && authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(Role.ROLE_USER.toString()::equals)) {
                 file.setUser(userService.findByEmailOrName(((SocialUserDetails) authentication.getPrincipal()).getEmail()));
             }
             imgFileRepository.save(file);

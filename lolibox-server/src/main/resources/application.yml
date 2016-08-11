@@ -31,6 +31,8 @@ admin:
   invitation-seed: lolibox
   cdnHost:
   imgHost:
+  green:
+    enabled: none
 
 storage:
   type: filesystem

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author choco
@@ -25,4 +26,23 @@ public interface ImgFileRepository extends JpaRepository<ImgFile, Long> {
     void updateDeleteByShortName(String name, boolean i);
 
     Page<ImgFile> findByUserIdOrderByCreateDateDesc(Long userId, Pageable pageable);
+
+
+    List<ImgFile> findByGreenStatus(Integer greenStatus);
+
+
+    @Transactional
+    @Modifying
+    @Query("update ImgFile u set u.greenStatus=?1 where u.id=?2")
+    void updateGreenStatusById(Integer greenStatus, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update ImgFile u set u.greenTaskId=?1 where u.id=?2")
+    void updateTaskIdById(String taskId, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update ImgFile u set u.greenPoint=?1 where u.id=?2")
+    void updateGreenPointById(float checkResult, Long id);
 }
