@@ -37,10 +37,14 @@ public class AliGreenConfiguration {
             @Scheduled(fixedRate = 120000)
             public void getResult() {
                 imgFileRepository.findByGreenStatus(1).forEach(img -> {
-                    float checkResult = greenService.getCheckResult(img.getGreenTaskId());
-                    boolean porn = checkResult > 90;
-                    imgFileRepository.updateGreenStatusById(porn ? 3 : 4, img.getId());
-                    imgFileRepository.updateGreenPointById(checkResult, img.getId());
+                    try {
+                        float checkResult = greenService.getCheckResult(img.getGreenTaskId());
+                        boolean porn = checkResult > 90;
+                        imgFileRepository.updateGreenStatusById(porn ? 3 : 5, img.getId());
+                        imgFileRepository.updateGreenPointById(checkResult, img.getId());
+                    } catch (Exception e) {
+                        imgFileRepository.updateGreenStatusById(4, img.getId());
+                    }
                 });
             }
         };
