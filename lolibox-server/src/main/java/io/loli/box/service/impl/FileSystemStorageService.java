@@ -28,7 +28,7 @@ public class FileSystemStorageService extends AbstractStorageService {
         String saveDate = getCurrentSaveDate();
         Path targetPath = new File(savePath + File.separator + saveDate, filename).toPath();
         Files.copy(is, targetPath);
-        return saveDate + "/" + filename;
+        return saveDate.replace("\\","/") + "/" + filename;
     }
 
     /**
