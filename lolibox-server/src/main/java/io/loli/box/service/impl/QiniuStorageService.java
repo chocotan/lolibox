@@ -55,7 +55,7 @@ public class QiniuStorageService extends AbstractStorageService {
             extra.mimeType = contentType;
         }
         PutRet ret = IoApi.Put(uptoken, "images/" + filename, is, extra);
-        return ret.getKey();
+        return filename;
     }
 
     @Override
