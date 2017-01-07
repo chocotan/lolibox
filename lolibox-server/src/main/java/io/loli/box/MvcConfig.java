@@ -16,6 +16,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations(
-                "file://" + imgFolder);
+                "file:///" + imgFolder.replace("\\","/"));
     }
 }
