@@ -106,9 +106,9 @@
             <version>1.1.4.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-hibernate-jpa</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>io.loli.social</groupId>
+            <artifactId>custom-spring-social-hibernate-jpa</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -157,7 +157,7 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
             <optional>true</optional>
-            <version>2.4.2</version>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -200,17 +200,4 @@
             </resource>
         </resources>
     </build>
-
-    <repositories>
-        <repository>
-            <id>opensourceagility-snapshots</id>
-            <url>http://repo.opensourceagility.com/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
