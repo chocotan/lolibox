@@ -1,6 +1,6 @@
 Lolibox 
 =======
-[![Build Status](https://drone.io/github.com/chocotan/lolibox/status.png)](https://drone.io/github.com/chocotan/lolibox/latest)  [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/chocotan/lolibox/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/chocotan/lolibox/master/LICENSE)
 
 
 A simple, fast image hosting application
