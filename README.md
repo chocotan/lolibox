@@ -23,6 +23,7 @@ Java 1.8
 git clone https://github.com/chocotan/lolibox.git
 cd lolibox
 mvn clean package
+chmod +x ./lolibox-server/target/lolibox-server-x.y.z-SNAPSHOT.jar
 ./lolibox-server/target/lolibox-server-x.y.z-SNAPSHOT.jar
 ```
 
