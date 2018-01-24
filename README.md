@@ -29,4 +29,4 @@ chmod +x ./lolibox-server/target/lolibox-server-x.y.z-SNAPSHOT.jar
 
 #### Screenshots
 
-![抓图162.png](http://c.hime.io/images/la.png)
+![example]http://b1.loli.io/images/AgBkN.png)
