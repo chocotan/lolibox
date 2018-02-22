@@ -8,7 +8,7 @@ A simple, fast image hosting application
 This is a sample project of spring-boot in fact %>_<%
 
 ### DEMO
-http://hime.io/
+https://loli.io/
 
 ### Environment
 Java 1.8
@@ -29,4 +29,4 @@ chmod +x ./lolibox-server/target/lolibox-server-x.y.z-SNAPSHOT.jar
 
 #### Screenshots
 
-![example](http://b1.loli.io/images/p6WXd.png)
+![example](https://i.loli.net/2018/02/22/5a8e7c2ccfdf6.png)
