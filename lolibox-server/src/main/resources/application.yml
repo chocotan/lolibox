@@ -25,7 +25,7 @@ logging:
   pattern:
     level:
 admin:
-  email: your@email.com
+  email: excalibll@163.com
   anonymous: false
   signup-invitation: false
   invitation-seed: lolibox
