@@ -96,15 +96,11 @@ $(document)
                 $("#links-result").select();
             });
 
-            var client = new ZeroClipboard($("#copy_all_btn"));
-            client.on("copy", function (event) {
-                var clipboard = event.clipboardData;
-                clipboard.setData("text/plain", $("#links-result").text());
-            });
-            client.on("aftercopy", function (event) {
-                $("#links-result").focus();
-                $("#links-result").select();
-            });
+            var copy_btn = $("#copy_all_btn");
+            if(copy_btn[0]) {
+                new ClipboardJS(copy_btn[0]);
+            }
+
             $(".uploader-browse-button").click(function () {
                 $(".uploader-form-file").click();
             });

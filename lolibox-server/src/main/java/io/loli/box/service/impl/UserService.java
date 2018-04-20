@@ -24,7 +24,7 @@ public class UserService {
             throw new UserExistsException("email.exists");
         }
 
-        if (userNameExist(user.getEmail())) {
+        if (userNameExist(user.getUserName())) {
             throw new UserExistsException("username.exists");
         }
         return userRepository.save(user);
