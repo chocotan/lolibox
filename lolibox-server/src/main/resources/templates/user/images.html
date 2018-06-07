@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li th:class="${images.number==(i-1)}? active:''"
-                        th:each="i:${#numbers.sequence( 1, images.totalPages)}"><a th:href="@{/user/images(page=${i-1},size=15)}" th:text="${i}"></a></li>
+                        th:each="i:${#numbers.sequence( 1, (images.totalPages == 0 ? 1: images.totalPages))}"><a th:href="@{/user/images(page=${i-1},size=15)}" th:text="${i}"></a></li>
                     <li th:class="${not images.hasNext()}? disabled:''">
                         <a th:href="@{/user/images(page=${images.number+1},size=15)}" aria-label="Next"  th:class="${not images.hasNext()}? disabled:''">
                             <span aria-hidden="true">&raquo;</span>
