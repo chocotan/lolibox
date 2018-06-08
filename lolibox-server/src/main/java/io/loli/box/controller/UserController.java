@@ -3,6 +3,7 @@ package io.loli.box.controller;
 import io.loli.box.dao.ImgFileRepository;
 import io.loli.box.entity.Role;
 import io.loli.box.entity.User;
+import io.loli.box.service.StorageService;
 import io.loli.box.service.impl.UserService;
 import io.loli.box.social.SocialUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
     private Integer pageSize = 20;
+
+    @Autowired
+    private StorageService service;
 
     @Autowired
     private ImgFileRepository repository;
@@ -45,7 +49,7 @@ public class UserController {
             user = userService.findByEmailOrName(((SocialUserDetails) authentication.getPrincipal()).getEmail());
         }
         Long id = user.getId();
-        model.addAttribute("images", repository.findByUserIdOrderByCreateDateDesc(id, page));
+        model.addAttribute("images", repository.findByUserIdAndDeleteOrderByCreateDate(id,false, page));
         return "user/images";
     }
 }

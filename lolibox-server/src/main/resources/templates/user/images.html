@@ -10,6 +10,7 @@
 
 <div class="content" layout:fragment="content">
     <div class="images">
+        <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="page-header">
             <h2><span th:utext="#{images.title}" th:remove="tag"></span></h2>
         </div>
@@ -26,7 +27,10 @@
                 <td class="images-date-td" th:text="${img.createDate}"></td>
                 <td class="images-name-td"><span th:class="img-name-label" th:text="${img.originName}" th:remove="tag"
                                                  th:title="${img.originName}"></span></td>
-                <td><a th:href="|${@adminProperties.imgHost}/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a></td>
+                <td>
+                    <a th:href="|${@adminProperties.imgHost}/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a>
+                    <a th:href="'javascript:;'" th:onclick="'deleteImage(\'' + |${img.shortName}| + '\')'" th:text="#{images.delete}"></a>
+                </td>
             </tr>
             </tbody>
         </table>

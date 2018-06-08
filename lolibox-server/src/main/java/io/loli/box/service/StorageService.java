@@ -1,5 +1,7 @@
 package io.loli.box.service;
 
+import io.loli.box.entity.User;
+
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,4 +28,7 @@ public interface StorageService {
 
     @Transactional
     public void deleteFile(String name);
+
+    @Transactional
+    boolean deleteFile(String name, User user);
 }
