@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.loli</groupId>
         <artifactId>lolibox</artifactId>
-        <version>0.2.3-SNAPSHOT</version>
+        <version>0.2.4-RELEASE</version>
     </parent>
 
     <groupId>io.loli</groupId>

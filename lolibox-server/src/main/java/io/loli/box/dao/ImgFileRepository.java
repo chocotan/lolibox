@@ -28,6 +28,18 @@ public interface ImgFileRepository extends JpaRepository<ImgFile, Long> {
 
     Page<ImgFile> findByUserIdOrderByCreateDateDesc(Long userId, Pageable pageable);
 
+    @Query(value = "select f.* " +
+            "from img_file f " +
+            "left join user_accounts u " +
+            "on f.user_id = u.id " +
+            "where u.id = ?1 and f.deleted = ?2 " +
+            "order by f.create_date desc /*#pageable*/",
+            countQuery = "select count(f.*) " +
+                    "from img_file f " +
+                    "left join user_accounts u " +
+                    "on f.user_id = u.id " +
+                    "where u.id = ?1 and f.deleted = ?2 ", nativeQuery = true)
+    Page<ImgFile> findByUserIdAndDeleteOrderByCreateDate(Long userId, Boolean delete, Pageable pageable);
 
     List<ImgFile> findByGreenStatus(Integer greenStatus, Date from, Date end);
 

@@ -1,8 +1,7 @@
 package io.loli.box.service.impl;
 
-import io.loli.box.entity.ImgFile;
+import io.loli.box.entity.User;
 import io.loli.box.service.AbstractStorageService;
-import org.joda.time.LocalDateTime;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Instant;
 import java.util.Calendar;
 
 @Component
@@ -69,26 +67,21 @@ public class FileSystemStorageService extends AbstractStorageService {
     }
 
     public void deleteFile(String name) {
-        ImgFile file = imgFileRepository.findByShortName(name);
-
         super.deleteFile(name);
-
-        Instant dateInstant = file.getCreateDate().toInstant();
-        LocalDateTime dateTime = LocalDateTime.fromDateFields(file.getCreateDate());
-        int year = dateTime.getYear();
-        int month = dateTime.getMonthOfYear();
-        int day = dateTime.getDayOfMonth();
-
-        String monthStr = String.format("00", month);
-        String dayStr = String.format("00", day);
-
-        String path = this.imgFolder
-                + File.separator + year+ File.separator
-                + monthStr + File.separator + dayStr
-                + File.separator + name;
+        String path = this.imgFolder + File.separator + name;
         File f = new File(path);
         if (f.exists()) {
             f.delete();
+        }
+    }
+
+    @Override
+    public boolean deleteFile(String name, User user) {
+        if(super.deleteFile(name, user)) {
+            this.deleteFile(name);
+            return true;
+        } else {
+            return false;
         }
     }
 
