@@ -5,7 +5,7 @@
 
     <groupId>io.loli</groupId>
     <artifactId>lolibox</artifactId>
-    <version>0.2.4-RELEASE</version>
+    <version>0.2.5-RELEASE</version>
     <packaging>pom</packaging>
     <url>https://github.com/chocotan/lolibox</url>
 

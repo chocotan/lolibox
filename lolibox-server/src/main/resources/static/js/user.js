@@ -5,26 +5,30 @@
  * @param shortName
  */
 function deleteImage(shortName) {
-    var csrf_token = $("#csrf_token").val();
-    var csrf_param = $("#csrf_token").attr("name");
-    var params = {};
-    params[csrf_param] = csrf_token;
-    params['name'] = encodeURI(shortName);
-    $.ajax({
-        url: '/image/delete',
-        type: 'POST',
-        data: params,
-        dataType: 'json',
-        async: true,
-        success: function (response, textStatus) {
-            if (response.status == "success") {
-                // $.notify("删除成功", "success");
-                window.location.reload();
-            } else {
-                $.notify(response.message, "error");
+    layer.confirm('确认要删除该图片吗？', {
+        btn: ['是','否'] //按钮
+    }, function(){
+        var csrf_token = $("#csrf_token").val();
+        var csrf_param = $("#csrf_token").attr("name");
+        var params = {};
+        params[csrf_param] = csrf_token;
+        params['name'] = encodeURI(shortName);
+        $.ajax({
+            url: '/image/delete',
+            type: 'POST',
+            data: params,
+            dataType: 'json',
+            async: true,
+            success: function (response, textStatus) {
+                if (response.status == "success") {
+                    window.location.reload();
+                } else {
+                    layer.msg('删除失败！');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                layer.error("出错啦，请稍后再试！")
             }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        }
+        });
     });
 }
