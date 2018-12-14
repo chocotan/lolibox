@@ -1,48 +1,48 @@
+# 应用名称，保持默认即可
 spring.application.name: lolibox
+# 运行端口，请自行修改为你所需要的端口
 server.port: 8888
+# 监听的ip，在没有用nginx等反代的情况下，如果想让外网也能访问，这个请设置为0.0.0.0
 server.address: 127.0.0.1
+# 图片最大大小
 spring.http.multipart.max-file-size: 20MB
+# 管理界面context-path，请勿修改
 management.context-path: /admin/
-
-# 在 linux 系统中，spring boot 应用在启动的时候，会在系统的 /tmp 目录下生成一个 tomcat.* 的文件目录，
-# 上传的文件会在这个临时文件夹中保存一份，临时目录下的文件在长时间没有使用时就会被系统自动删除掉，这时候再上传文件就可能会报错，
-# 报错信息一般类似这样：The temporary upload location [/tmp/tomcat.5425935716444258807.8888/work/Tomcat/localhost/ROOT] is not
+# tomcat临时目录，请勿修改
 server:
   tomcat:
     basedir: ${user.home}/lolibox/tmp
-
+# spring的配置，请勿修改
 security:
   headers:
     cache: true
   ignored: /webjars/**,/css/**,/js/**,/img/**
-
-#oauth2:
-#  clients:
-#    -
-#      name: test-client
-#      secret: test-password
-
-
 spring.resources.chain.strategy.content.enabled: true
 spring.resources.chain.strategy.content.paths: /**
-
+# 日志文件路径
 logging:
   file: ${user.home}/lolibox/lolibox.log
   level.io.loli: debug
   pattern:
     level:
+# 管理员配置
 admin:
-  email: excalibll@163.com
+  # 管理员的邮箱，你需要修改这里的配置，并在成功运行后，注册一个这个邮箱的账号
+  email: admin@yoursite.com
+  # 是否开启匿名上传
   anonymous: false
+  # 是否开启注册邀请，具体怎么用请提issue
   signup-invitation: false
   invitation-seed: lolibox
   cdnHost:
+  # 如果你使用的是云存储，请把此配置修改为你的云存储的域名，示例：http://mycloud.qcloud.com/
   imgHost:
   green:
     enabled: none
-
 storage:
+  # 图片存储服务类型，filesystem表示使用系统磁盘，还支持aliyun、qiniu、baidu、cos
   type: filesystem
+  # 图片存储路径，只在type为filesystem时有效
   filesystem.imgFolder: ${user.home}/lolibox/
   aliyun:
     url:
@@ -66,6 +66,7 @@ storage:
     region:
     bucket:
 
+# 下面都是spring相关的配置，请勿修改
 spring:
   h2:
     console:
@@ -93,7 +94,6 @@ spring.social.weibo:
 
 
 
-#login.social.enabled: weibo
 ---
 spring.profiles: zuul
 zuul:

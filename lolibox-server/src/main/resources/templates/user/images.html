@@ -19,6 +19,7 @@
             <tr>
                 <th><span th:utext="#{images.uploadDate}" th:remove="tag"></span></th>
                 <th><span th:utext="#{images.name}" th:remove="tag"></span></th>
+                <th><span th:utext="#{images.size}" th:remove="tag"></span></th>
                 <th><span th:utext="#{images.action}" th:remove="tag"></span></th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <td class="images-date-td" th:text="${img.createDate}"></td>
                 <td class="images-name-td"><span th:class="img-name-label" th:text="${img.originName}" th:remove="tag"
                                                  th:title="${img.originName}"></span></td>
+                <td class="images-name-td" th:text="${img.size/1024+'K'}"></td>
                 <td>
                     <a th:href="|${@adminProperties.imgHost}/images/${img.shortName}|" target="_blank" th:text="#{images.show}"></a>
                     <a th:href="'javascript:;'" th:onclick="'deleteImage(\'' + |${img.shortName}| + '\')'" th:text="#{images.delete}"></a>
