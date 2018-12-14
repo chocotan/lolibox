@@ -58,6 +58,13 @@ storage:
     secret:
     url:
     name:
+  cos:
+    key:
+    secret:
+    url:
+    name:
+    region:
+    bucket:
 
 spring:
   h2:
