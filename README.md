@@ -8,7 +8,7 @@ A simple, fast image hosting application
 This is a sample project of spring-boot in fact %>_<%
 
 ### DEMO
-http://hime.io/
+https://loli.io/
 
 ### Environment
 Java 1.8
@@ -29,9 +29,4 @@ chmod +x ./lolibox-server/target/lolibox-server-x.y.z-SNAPSHOT.jar
 
 #### Screenshots
 
-![example](http://b1.loli.io/images/AgBkN.png)
-
-
-### LICENSE
-Lolibox http://www.teamdev.com/jxbrowser, which is a proprietary software. The use of JxBrowser is governed by the JxBrowser Product Licence Agreement http://www.teamdev.com/jxbrowser-licence-agreement.
-If you would like to use JxBrowser in your development, please contact TeamDev.
+![example](https://i.loli.net/2018/02/22/5a8e7c2ccfdf6.png)

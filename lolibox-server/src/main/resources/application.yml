@@ -1,8 +1,15 @@
 spring.application.name: lolibox
 server.port: 8888
+server.address: 127.0.0.1
 spring.http.multipart.max-file-size: 20MB
 management.context-path: /admin/
 
+# 在 linux 系统中，spring boot 应用在启动的时候，会在系统的 /tmp 目录下生成一个 tomcat.* 的文件目录，
+# 上传的文件会在这个临时文件夹中保存一份，临时目录下的文件在长时间没有使用时就会被系统自动删除掉，这时候再上传文件就可能会报错，
+# 报错信息一般类似这样：The temporary upload location [/tmp/tomcat.5425935716444258807.8888/work/Tomcat/localhost/ROOT] is not
+server:
+  tomcat:
+    basedir: ${user.home}/lolibox/tmp
 
 security:
   headers:
@@ -25,7 +32,7 @@ logging:
   pattern:
     level:
 admin:
-  email: your@email.com
+  email: excalibll@163.com
   anonymous: false
   signup-invitation: false
   invitation-seed: lolibox
@@ -80,7 +87,6 @@ spring.social.weibo:
 
 
 #login.social.enabled: weibo
-
 ---
 spring.profiles: zuul
 zuul:

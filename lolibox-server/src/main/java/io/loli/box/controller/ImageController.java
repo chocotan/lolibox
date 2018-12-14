@@ -5,6 +5,7 @@ import io.loli.box.dao.ImgFileRepository;
 import io.loli.box.entity.IdSeq;
 import io.loli.box.entity.ImgFile;
 import io.loli.box.entity.Role;
+import io.loli.box.entity.User;
 import io.loli.box.service.StorageService;
 import io.loli.box.service.impl.UserService;
 import io.loli.box.social.SocialUserDetails;
@@ -18,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -91,6 +93,26 @@ public class ImageController {
     @RequestMapping("/oauthUpload")
     public StatusBean oauthUpload(@RequestParam(value = "image", required = true) MultipartFile imageFile, Authentication authentication) {
         return upload(imageFile, authentication);
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    @PreAuthorize("@adminProperties.anonymous or hasRole('USER')")
+    public StatusBean delete(@RequestParam(value = "name") String name, Authentication authentication) {
+        try {
+            if (authentication != null && authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(Role.ROLE_USER.toString()::equals)) {
+                User user = userService.findByEmailOrName(((SocialUserDetails) authentication.getPrincipal()).getEmail());
+                if(!service.deleteFile(name, user)) {
+                    return new StatusBean("error", "没有删除的权限");
+                }
+            } else {
+                return new StatusBean("error", "没有删除的权限");
+            }
+        } catch (Exception e) {
+            return new StatusBean("error", e.getMessage());
+        }
+        return new StatusBean("success", "成功删除文件");
+
     }
 
 }

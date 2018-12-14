@@ -3,8 +3,10 @@
 <head>
     <title layout:title-pattern="$CONTENT_TITLE - $DECORATOR_TITLE" th:inline="text" th:text="#{title.htmlTitle}+' - '+#{title.desc}">
     </title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" />
+    <link rel="icon" sizes="any" th:href="@{/img/favicon.svg}" />
     <script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
-    <script th:src="@{/webjars/zeroclipboard/2.2.0/ZeroClipboard.min.js}"></script>
+    <script th:src="@{/js/clipboard.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/jquery-knob/1.2.11/jquery.knob.min.js}"></script>
     <script th:src="@{/js/jquery.iframe-transport.min.js}"></script>
@@ -13,6 +15,8 @@
     <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <script th:src="@{/js/upload.js}"></script>
+    <script th:src="@{/js/user.js}"></script>
+    <script th:src="@{/lib/layer-v3.1.1/layer/layer.js}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
