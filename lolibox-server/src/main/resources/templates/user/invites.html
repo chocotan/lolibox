@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title><span th:text="邀请码" th:remove="tag"></span></title>
+</head>
+
+<body>
+
+<div class="content" layout:fragment="content">
+    <div class="images">
+        <div class="page-header">
+            <h2><span th:text="邀请码" th:remove="tag"></span></h2>
+            <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <a th:href="@{/user/invites/create}" th:text="创建邀请码" class="btn btn-primary"></a>
+
+        </div>
+        <div class="alert alert-primary" role="alert" th:if="${msg !=null }" th:text="${msg}"></div>
+        <table class="table table-condensed" id="images-table" tyle="table-layout:fixed ;overflow:hidden;">
+            <thead>
+            <tr>
+                <th><span th:text="邀请码" th:remove="tag"></span></th>
+                <th><span th:text="状态" th:remove="tag"></span></th>
+                <th><span th:text="使用人" th:remove="tag"></span></th>
+                <th><span th:text="创建时间" th:remove="tag"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i : ${invites}">
+                <td th:text="${i.code}"></td>
+                <td th:text="${i.status==0?'未使用':'已使用'}"></td>
+                <td th:text="${i.useEmail}"></td>
+                <td th:text="${i.createDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

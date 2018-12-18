@@ -1,8 +1,9 @@
 package io.loli.box.controller;
 
 import io.loli.box.AdminProperties;
+import io.loli.box.dao.InvitationCodeRepository;
+import io.loli.box.entity.InvitationCode;
 import io.loli.box.exception.UserExistsException;
-import io.loli.box.service.InvitationCodeService;
 import io.loli.box.service.impl.UserService;
 import io.loli.box.entity.Role;
 import io.loli.box.entity.User;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author choco
@@ -34,7 +37,7 @@ public class LoginController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private InvitationCodeService invitationCodeService;
+    private InvitationCodeRepository invitationCodeRepository;
 
     @Autowired
     private AdminProperties adminProperties;
@@ -60,10 +63,20 @@ public class LoginController {
         if (adminProperties.isSignupInvitation()) {
             // validate invitation code
             try {
-                if (!invitationCodeService.verify(registerDto.getEmail(), registerDto.getInvitationCode())) {
+                Optional<InvitationCode> codeOpt = invitationCodeRepository.findByCode(registerDto.getInvitationCode());
+                // code不存在或者状态为1(已被使用)
+                if (!codeOpt.isPresent() || codeOpt.get().getStatus() == 1) {
                     bindingResult.rejectValue("invitationCode", "invitationCode.error");
                     return signup(registerDto);
+                } else {
+                    // 存在且状态正常时候，更新状态
+                    InvitationCode code = codeOpt.get();
+                    code.setStatus(1);
+                    code.setUseDate(new Date());
+                    code.setUseEmail(registerDto.getEmail());
+                    invitationCodeRepository.save(code);
                 }
+
             } catch (Exception e) {
                 bindingResult.rejectValue("invitationCode", "invitationCode.error");
                 return signup(registerDto);

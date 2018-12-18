@@ -33,7 +33,8 @@ admin:
   anonymous: false
   # 是否开启注册邀请，具体怎么用请提issue
   signup-invitation: false
-  invitation-seed: lolibox
+  # 邀请码周期，n天创建一次邀请码
+  invitation-limit-days: 1
   cdnHost:
   # 如果你使用的是云存储，请把此配置修改为你的云存储的域名，示例：http://mycloud.qcloud.com/
   imgHost:

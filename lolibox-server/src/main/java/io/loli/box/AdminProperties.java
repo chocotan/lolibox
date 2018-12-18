@@ -18,7 +18,7 @@ public class AdminProperties {
 
     private boolean signupInvitation = true;
 
-    private String invitationSeed = "lolibox";
+    private Integer invitationLimitDays = 7;
 
     private String imgHost;
     private String cdnHost;
@@ -58,12 +58,12 @@ public class AdminProperties {
         this.signupInvitation = signupInvitation;
     }
 
-    public String getInvitationSeed() {
-        return invitationSeed;
+    public Integer getInvitationLimitDays() {
+        return invitationLimitDays;
     }
 
-    public void setInvitationSeed(String invitationSeed) {
-        this.invitationSeed = invitationSeed;
+    public void setInvitationLimitDays(Integer invitationLimitDays) {
+        this.invitationLimitDays = invitationLimitDays;
     }
 
     public String getCdnHost() {
